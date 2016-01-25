@@ -1,8 +1,10 @@
 # Scripts
 Collection of one-off scripts
+---
+###Directory Contents
 
-###bash
+####bash
 Contains a collection of bash scripts.
 
-###R
+####R
 Contains a collection of R scripts.
