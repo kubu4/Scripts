@@ -1,2 +1,2 @@
-# BashScripts
-Collection of one-off Bash scripts
+# Scripts
+Collection of one-off scripts
