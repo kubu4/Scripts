@@ -1,4 +1,6 @@
 
+##Originally created by Sean Bennett at the Univ. of Washington
+
 ## Function CQagg takes arguments dataframe (data construct containing your data), 
 ## label.column(column index containing sample label (std1, unkn-1, etc)), and cq.column(column where cq values are located).
 ## A True/False flag filename allows user to chose either outputting to a .csv file, requesting the filename wanted,
