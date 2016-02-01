@@ -15,7 +15,8 @@ wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-lin
 googleusercontent.com,www.dropbox.com,dl.dropbox.com \
 http://onsnetwork.org/sjwfriedmanlab/
 
-#Requires the "cifs-utils" package, which is not installed by default on 
+
+#Mounting the lab server requires the Linux "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
 
 #Check for installation of cifs-utils. Looks to see if cifs-utils is installed.
@@ -31,7 +32,7 @@ fi
 #Uncomment (i.e. remove #) next line if appending date/name to backup is desired.
 #SAM_NOTEBOOK=$(date '+%Y%m%d')_sam
 
-#Source credentials file for mounting server
+#Source (i.e. load into memory) credentials file for mounting server
 #Credentials file contains username/password for lab server.
 . ~/.b_or_d_mount_creds
 

@@ -32,7 +32,7 @@ fi
 #Uncomment (i.e. remove #) next line if appending date/name to backup is desired.
 #SAM_NOTEBOOK=$(date '+%Y%m%d')_sam
 
-#Source credentials file for mounting server
+#Source (i.e. load into memory) credentials file for mounting server
 #Credentials file contains username/password for lab server.
 . ~/.b_or_d_mount_creds
 
@@ -40,7 +40,7 @@ fi
 #Look for mountpoint directory.
 find /mnt -maxdepth 1 -type d -name 'backupordie'
 
-#If the directory does not exist (exit status [$?] equals 1), then create
+#If the directory does not exist (i.e. exit status [$?] equals 1), then create
 #the directory.
 if [ $? -eq 1 ]
 then sudo mkdir /mnt/backupordie
@@ -52,7 +52,7 @@ mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
 
 #Change to Sam's notebook backups folder.
-cd /mnt/backupordie/Notebook_backups
+cd /mnt/backupordie/Notebook_backups/sam
 
 #If change directory fails (exit status [$?] equals 1), exit script.
 if [ $? -eq 1 ]
