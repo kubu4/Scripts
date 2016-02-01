@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Shell script to backup lab notebook hosted on onsnetwork.org
-#for offline viewing.
+#for offline viewing and copy notebook to lab server.
 
 #Download website with all necessary files for offline viewing.
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
@@ -15,7 +15,8 @@ wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-lin
 googleusercontent.com,www.dropbox.com,dl.dropbox.com \
 http://onsnetwork.org/sjwfriedmanlab/
 
-#Requires the "cifs-utils" package, which is not installed by default on 
+
+#Mounting the lab server requires the Linux "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
 
 #Check for installation of cifs-utils. Looks to see if cifs-utils is installed.
