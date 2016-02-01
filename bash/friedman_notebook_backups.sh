@@ -20,7 +20,7 @@ fi
 #SAM_NOTEBOOK=$(date '+%Y%m%d')_sam
 
 #Source credentials file for mounting server
-
+#Credentials file contains username/password for lab server.
 . ~/.b_or_d_mount_creds
 
 #Verify mountpoint (i.e. directory) is present.
