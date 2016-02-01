@@ -3,6 +3,8 @@
 #Shell script to backup lab notebook hosted on onsnetwork.org
 #for offline viewing and copy notebook to lab server.
 
+
+
 #Download website with all necessary files for offline viewing.
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
 #.gtf, etc.). Specify allowable domains to download linked content
@@ -51,8 +53,8 @@ fi
 mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
 
-#Change to Sam's notebook backups folder.
-cd /mnt/backupordie/Notebook_backups/sam
+#Copy downloaded notebook to Sam's notebook backups folder on lab server.
+cp -rf /home/samb/notebook_backup/sam /mnt/backupordie/Notebook_backups
 
 #If change directory fails (exit status [$?] equals 1), exit script.
 if [ $? -eq 1 ]
