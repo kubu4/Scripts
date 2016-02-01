@@ -34,6 +34,7 @@ then sudo mkdir /mnt/backupordie
 fi
 
 #Mount "lab" share of the backupordie server.
+#Utilizes username/password variables that were sourced from credentials file.
 mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
 
