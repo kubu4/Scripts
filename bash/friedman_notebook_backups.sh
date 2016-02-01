@@ -3,7 +3,8 @@
 #Shell script to backup lab notebook hosted on onsnetwork.org
 #for offline viewing and copy notebook to lab server.
 
-
+#Change to working directory.
+cd /home/samb/notebook_backup/sam
 
 #Download website with all necessary files for offline viewing.
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff

@@ -54,11 +54,12 @@ mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
 
 #Copy downloaded notebook to Sam's notebook backups folder on lab server.
+#Redirects stderror to an error file for troubleshooting
 cp -rf /home/samb/notebook_backup/sam /mnt/backupordie/Notebook_backups 2> /home/samb/notebook_backup/error.file
 
-#If copy fails (exit status [$?] equals 1), exit script.
-if [ $? -eq 1 ]
-then exit
+#If copy fails (exit status [$?] does NOT equal 0), exit script.
+if [ $? -ne 0 ]
+then echo "copy command failed. See error log at /home/samb/notebook_backup/error.file"
 fi
 
 #Commit version using Git and timestamp variable for commit message
