@@ -3,18 +3,6 @@
 #Shell script to backup lab notebook hosted on onsnetwork.org
 #for offline viewing.
 
-#Download website with all necessary files for offline viewing.
-#Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
-#.gtf, etc.). Specify allowable domains to download linked content
-#(e.g. dropbox.com, google docs, etc.).
-wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
---page-requisites \
---reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
---no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
---domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
-googleusercontent.com,www.dropbox.com,dl.dropbox.com \
-http://onsnetwork.org/sjwfriedmanlab/
-
 #Requires the "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
 
@@ -57,6 +45,18 @@ cd /mnt/backupordie/Notebook_backups
 if [ $? -eq 1 ]
 then exit
 fi
+
+#Download website with all necessary files for offline viewing.
+#Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
+#.gtf, etc.). Specify allowable domains to download linked content
+#(e.g. dropbox.com, google docs, etc.).
+wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
+--page-requisites \
+--reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
+--no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
+--domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
+googleusercontent.com,www.dropbox.com,dl.dropbox.com \
+http://onsnetwork.org/sjwfriedmanlab/
 
 #Commit version using Git and timestamp variable for commit message
 #git commit -a -m "$SAM_NOTEBOOK"
