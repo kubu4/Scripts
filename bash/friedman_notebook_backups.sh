@@ -50,7 +50,7 @@ find /mnt -maxdepth 1 -type d -name 'backupordie'
 #If the directory does not exist (i.e. exit status [$?] equals 1), then create
 #the directory.
 if [ $? -eq 1 ]
-then sudo mkdir /mnt/backupordie
+then mkdir /mnt/backupordie
 fi
 
 #Mount "lab" share of the backupordie server.
