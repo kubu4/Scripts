@@ -19,6 +19,10 @@ googleusercontent.com,www.dropbox.com,dl.dropbox.com \
 http://onsnetwork.org/sjwfriedmanlab/
 
 
+#Remove unecessary dropbox files.
+find /home/samb/notebook_backup/sam/www.dropbox.com -maxdepth 1 \! \( -name s -o -name sh \) -exec rm -rf '{}' \;
+
+
 #Mounting the lab server requires the Linux "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
 
