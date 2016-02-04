@@ -41,7 +41,7 @@ fi
 
 #Source (i.e. load into memory) credentials file for mounting server
 #Credentials file contains username/password for lab server.
-. ~/.b_or_d_mount_creds
+. /home/samb/.b_or_d_mount_creds
 
 #Verify mountpoint (i.e. directory) is present.
 #Look for mountpoint directory.
