@@ -18,7 +18,7 @@ printf '%s\n' "$no_readme" | while IFS= read -r line; do echo "$line" >> "$line"
 #Format the output (printf) to print the filename, followed by a tab, followed by the readcount.
 #The command "tee -a" is used to both print the output to the screen and append the output to the readme.md file.
 
-printf '%s\n' "$no_readme"  | while IFS= read -r line; do linecount=`gunzip -c "$line"/*.gz | wc -l`; readcount=$(($linecount/4)); printf "%s\t%s\n\n" "${line##*/}" "$readcount" >> "$line"/readme.md; done
+printf '%s\n' "$no_readme"  | while IFS= read -r line; do filename="$line"/*.gz; linecount=`gunzip -c "$filename | wc -l`; readcount=$(($linecount/4)); printf "%s\t%s\n\n" "${filename##*/}" "$readcount" >> "$line"/readme.md; done
 
 #Finds folders lacking checksums.md5 files and generates checksums for all files in that directory
 
