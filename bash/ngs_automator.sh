@@ -15,7 +15,7 @@ printf '%s\n' "$no_readme" | while IFS= read -r line; do echo "$line" >> "$line"
 #Illumina sequencing files are composed of four lines per read.
 #Format the output (printf) to print the filename, followed by a tab, followed by the readcount.
 #The command "tee -a" is used to both print the output to the screen and append the output to the readme.md file.
-printf '%s\n' "$no_readme"  | while IFS= read -r line; do linecount=`gunzip -c "$line/" | wc -l`; readcount=$(($linecount/4)); printf "%s\t%s\n\n" "${line##*/}" "$readcount" >> "$line"/readme.md;
+printf '%s\n' "$no_readme"  | while IFS= read -r line; do linecount=`gunzip -c "$line"/*.gz | wc -l`; readcount=$(($linecount/4)); printf "%s\t%s\n\n" "${line##*/}" "$readcount" >> "$line"/readme.md;
 done
 
 #Finds folders lacking checksums.md5 files and generates checksums for all files in that directory
