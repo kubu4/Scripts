@@ -9,7 +9,7 @@ no_readme=$(while read i; do echo "$i"; done < <(find "`pwd`" -not -path '*/\.*'
 
 #Writes path to readme files in directories lacking readme files.
 
-printf '%s\n' "$no_readme" | sed 's/Volumes\/owl_web/web/' | while IFS= read -r line; do echo "$line" >> "$line"/readme.md; done
+printf '%s\n' "$no_readme" | sed 's/Volumes\/owl_web/web/' | while IFS= read -r line; do echo "$line" >> "$no_readme"/readme.md; done
 
 
 
