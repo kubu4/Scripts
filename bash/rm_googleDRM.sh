@@ -8,7 +8,7 @@
 touch ~/testing/pre_googleDRM.out
 touch ~/testing/post_googleDRM.out
 
-#For loop recursively searches for files that contain the word "Google".
+#For loop recursively searches for MP3 files that contain the word "Google".
 #The name of any matching file is written to file.
 #Any matching files have the PrivateFrame removed from the file using eyeD3 program.
 IFS=$'\n'
@@ -20,8 +20,8 @@ then echo "$i" >> ~/testing/pre_googleDRM.out && eyeD3 --remove-frame PRIV "$i"
 fi
 done
 
-
-#For loop recursively searches for files that contain the word "Google".
+#Re-analyze files for use in verifying removal of PRIV metadata.
+#For loop recursively searches for MP3 files that contain the word "Google".
 #The name of any matching file is written to file.
 IFS=$'\n'
 for i in $(find . -name '*.mp3')

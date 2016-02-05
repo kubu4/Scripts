@@ -1,9 +1,25 @@
 #!/bin/bash
 
 #Shell script to backup lab notebook hosted on onsnetwork.org
-#for offline viewing.
+#for offline viewing and copy notebook to lab server.
 
-#Requires the "cifs-utils" package, which is not installed by default on 
+#Change to working directory.
+cd /home/samb/notebook_backup/sam
+
+#Download website with all necessary files for offline viewing.
+#Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
+#.gtf, etc.). Specify allowable domains to download linked content
+#(e.g. dropbox.com, google docs, etc.).
+sudo -u samb wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
+--page-requisites \
+--reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
+--no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
+--domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
+googleusercontent.com,www.dropbox.com,dl.dropbox.com \
+http://onsnetwork.org/sjwfriedmanlab/
+
+
+#Mounting the lab server requires the Linux "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
 
 #Check for installation of cifs-utils. Looks to see if cifs-utils is installed.
@@ -19,43 +35,33 @@ fi
 #Uncomment (i.e. remove #) next line if appending date/name to backup is desired.
 #SAM_NOTEBOOK=$(date '+%Y%m%d')_sam
 
-#Source credentials file for mounting server
-
+#Source (i.e. load into memory) credentials file for mounting server
+#Credentials file contains username/password for lab server.
 . ~/.b_or_d_mount_creds
 
 #Verify mountpoint (i.e. directory) is present.
 #Look for mountpoint directory.
 find /mnt -maxdepth 1 -type d -name 'backupordie'
 
-#If the directory does not exist (exit status [$?] equals 1), then create
+#If the directory does not exist (i.e. exit status [$?] equals 1), then create
 #the directory.
 if [ $? -eq 1 ]
 then sudo mkdir /mnt/backupordie
 fi
 
 #Mount "lab" share of the backupordie server.
+#Utilizes username/password variables that were sourced from credentials file.
 mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
 
-#Change to Sam's notebook backups folder.
-cd /mnt/backupordie/Notebook_backups
+#Copy downloaded notebook to Sam's notebook backups folder on lab server.
+#Redirects stderror to an error file for troubleshooting
+cp -rf /home/samb/notebook_backup/sam /mnt/backupordie/Notebook_backups 2> /home/samb/notebook_backup/error.file
 
-#If change directory fails (exit status [$?] equals 1), exit script.
-if [ $? -eq 1 ]
-then exit
+#If copy fails (exit status [$?] does NOT equal 0), exit script.
+if [ $? -ne 0 ]
+then echo "copy command failed. See error log at /home/samb/notebook_backup/error.file"
 fi
-
-#Download website with all necessary files for offline viewing.
-#Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
-#.gtf, etc.). Specify allowable domains to download linked content
-#(e.g. dropbox.com, google docs, etc.).
-wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
---page-requisites \
---reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
---no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
---domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
-googleusercontent.com,www.dropbox.com,dl.dropbox.com \
-http://onsnetwork.org/sjwfriedmanlab/
 
 #Commit version using Git and timestamp variable for commit message
 #git commit -a -m "$SAM_NOTEBOOK"
