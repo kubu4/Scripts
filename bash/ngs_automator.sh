@@ -11,7 +11,7 @@ new_readme=$(while read i; do echo "$i"; done < <(find . -type f -name readme.md
 
 #Writes path to readme files in directories lacking readme files.
 
-printf '%s\n' "$no_readme" | while IFS= read -r line; do echo "$line" >> "$line"/readme.md; done
+printf '%s\n' "$new_readme" | while IFS= read -r line; do echo "$line" >> "$line"/readme.md; done
 
 
 
@@ -20,7 +20,7 @@ printf '%s\n' "$no_readme" | while IFS= read -r line; do echo "$line" >> "$line"
 #Format the output (printf) to print the filename, followed by a tab, followed by the readcount.
 #The command "tee -a" is used to both print the output to the screen and append the output to the readme.md file.
 
-printf '%s\n' "$no_readme"  | while IFS= read -r line; do filename="$line"/*.gz; echo $filename; done
+printf '%s\n' "$new_readme"  | while IFS= read -r line; do filename="$line"/*.gz; echo $filename; done
 
 #linecount=`gunzip -c "$filename | wc -l`; readcount=$(($linecount/4)); printf "%s\t%s\n\n" "${filename##*/}" "$readcount" >> "$line"/readme.md; done
 
