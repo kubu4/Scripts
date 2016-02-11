@@ -48,15 +48,15 @@ fi
 find /mnt -maxdepth 2 -type d -name 'Notebook_backups'
 
 #If the directory does not exist (i.e. exit status [$?] equals 1), then create
-#the directory.
-if [ $? -eq 1 ]
-then mkdir /mnt/backupordie
-fi
-
-#Mount "lab" share of the backupordie server.
+#the directory and 
+#mount "lab" share of the backupordie server.
 #Utilizes username/password variables that were sourced from credentials file.
+if [ $? -eq 1 ]
+then mkdir /mnt/backupordie;
 mount -t cifs -o username="$user",password="$pass" \
 //backupordie.fish.washington.edu/lab /mnt/backupordie/
+fi
+
 
 #Copy downloaded notebook to Sam's notebook backups folder on lab server.
 #Redirects stderror to an error file for troubleshooting
