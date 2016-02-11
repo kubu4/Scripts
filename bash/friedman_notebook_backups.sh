@@ -43,11 +43,11 @@ fi
 #Credentials file contains username/password for lab server.
 . /home/samb/.b_or_d_mount_creds
 
-#Verify mountpoint (i.e. directory) is present.
-#Look for mountpoint directory.
+#Verify server is mounted.
+#Look for Notebook_backups directory on server.
 find /mnt -maxdepth 2 -type d -name 'Notebook_backups'
 
-#If the directory does not exist (i.e. exit status [$?] equals 1), then create
+#If the directory is not found (i.e. exit status [$?] equals 1), then create
 #the directory and 
 #mount "lab" share of the backupordie server.
 #Utilizes username/password variables that were sourced from credentials file.
