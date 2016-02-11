@@ -45,7 +45,7 @@ fi
 
 #Verify mountpoint (i.e. directory) is present.
 #Look for mountpoint directory.
-find /mnt -maxdepth 1 -type d -name 'backupordie'
+find /mnt -maxdepth 2 -type d -name 'Notebook_backups'
 
 #If the directory does not exist (i.e. exit status [$?] equals 1), then create
 #the directory.
