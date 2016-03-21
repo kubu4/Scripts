@@ -10,7 +10,7 @@ cd /home/samb/notebook_backup/sam
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
 #.gtf, etc.). Specify allowable domains to download linked content
 #(e.g. dropbox.com, google docs, etc.).
-sudo -u samb wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
+wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
 --page-requisites \
 --reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
 --no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
