@@ -44,8 +44,8 @@ for file in *.csv; do
 	for file1 in *.headless; do
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
 		# Append new first column with filename.
-		for file in *.tmp; do
-			awk -F, '{$1='$qpcr_filename' FS $1;}1' OFS=, "$file"
+		for file2 in *.tmp; do
+			awk -F, '{$1='$qpcr_filename' FS $1;}1' OFS=, "$file2" > "${file1/.tmp/.tmp2}"
 		done
 done
 
