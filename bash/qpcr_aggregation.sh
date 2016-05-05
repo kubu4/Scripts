@@ -6,7 +6,11 @@
 # R script: CFX_Cq_Agg.R (https://github.com/kubu4/Scripts/blob/master/R/CFX_Cq_Agg.R)
 
 
-
+# Replace spaces with underscores in filenames
+for file in *.csv; do
+# Replace spaces with underscores in filenames
+	mv "$file" "${file// /}"
+	
 # Pull date from filename
 	#IFS="_"; read -ra qpcr_date <<< "$file"
 	#qpcr_date=${qpcr_date[1]}
@@ -17,9 +21,4 @@
 # Append new first column with filename.
 
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
-
-# Replace spaces with underscores in filenames
-for file in *.csv; do
-# Replace spaces with underscores in filenames
-	mv "$file" "${file// /}"
 done
