@@ -23,7 +23,7 @@ for file in *.csv; do
 	IFS="$OIFS"
 
 # Add date to first column
-	awk '{ print "$qpcr_date"$0}'
+	awk '{ print "$qpcr_date"$0 }' "$file"
 
 # Append new first column with filename.
 	#awk -F, '{$1='$qpcr_date' FS $1;}1' OFS=, "$file"
