@@ -33,7 +33,7 @@ for file in *.csv; do
 	echo "$qpcr_date"
 	IFS="$OIFS"
 done
-echo "$qpcr_date"
+
 # Remove header to allow for easier data appending.
 
 	
