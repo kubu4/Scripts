@@ -20,5 +20,6 @@
 
 # Replace spaces with underscores in filenames
 for file in *.csv; do
+# Replace spaces with underscores in filenames
 	mv "$file" "${file// /}"
 done
