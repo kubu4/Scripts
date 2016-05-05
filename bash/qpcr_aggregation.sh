@@ -39,13 +39,15 @@ for file in *.csv; do
 	
 	# Remove header to allow for easier data appending.
 	awk 'NR>1' "$file" > "${file/.csv/.headless}"
+	
+	# Add qPCR date to first column and output to .tmp file
+	for file1 in *.headless; do
+		awk -v var="$qpcr_date" '{ print var$0 }' "$file2" > "${file2/.headless/.tmp}"
+	done
 done
 
 	
-# Add qPCR date to first column and output to .tmp file
-for file in *.headless; do
-	awk -v var="$qpcr_date" '{ print var$0 }' "$file" > "${file/.headless/.tmp}"
-done	
+	
 
 # Append new first column with filename.
 for file in *.tmp; do
