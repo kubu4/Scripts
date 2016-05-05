@@ -10,7 +10,7 @@
 
 for file in *.csv; do
 # Remove spaces from filenames
-	mv "$file" ${file// /}
+	mv "$file" ${file// /_}
 	
 # Pull date from filename
 	IFS-""; read -ra qpcr_date <<< "$file"
