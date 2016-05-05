@@ -49,4 +49,3 @@ echo "$qpcr_date"
 	rm *.old
 	
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
-done
