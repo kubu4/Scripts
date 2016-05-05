@@ -12,7 +12,10 @@ for file in *.csv; do
 # Remove spaces from filenames
 	mv "$file" ${file// /}
 	
+# Pull date from filename
+	
 # Add date to first column
+	#awk -F, '{$1=1 FS $1;}1' OFS=,
 
 # Append new first column with filename.
 
