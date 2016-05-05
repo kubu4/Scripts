@@ -9,11 +9,11 @@
 
 
 for file in *.csv; do
-# Remove spaces from filenames
+# Replace spaces with underscores in filenames
 	mv "$file" ${file// /_}
 	
 # Pull date from filename
-	IFS-""; read -ra qpcr_date <<< "$file"
+	IFS="_"; read -ra qpcr_date <<< "$file"
 	qpcr_date=${qpcr_date[1]}
 	echo ${qpcr_date[1]}
 # Add date to first column
