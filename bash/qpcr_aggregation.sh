@@ -9,7 +9,7 @@
 # Replace spaces with underscores in filenames
 for file in *.csv; do
 # Replace spaces with underscores in filenames
-	mv "$file" "${file// /}"
+	mv "$file" "${file// /_}"
 	
 # Pull date from filename
 	#IFS="_"; read -ra qpcr_date <<< "$file"
