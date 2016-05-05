@@ -7,11 +7,6 @@
 
 
 
-
-for file in *.csv; do
-# Replace spaces with underscores in filenames
-	mv "$file" ${file// /}
-	
 # Pull date from filename
 	#IFS="_"; read -ra qpcr_date <<< "$file"
 	#qpcr_date=${qpcr_date[1]}
@@ -22,4 +17,8 @@ for file in *.csv; do
 # Append new first column with filename.
 
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
+
+for file in *.csv; do
+# Replace spaces with underscores in filenames
+	mv "$file" ${file// /}
 done
