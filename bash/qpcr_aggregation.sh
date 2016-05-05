@@ -22,7 +22,8 @@ for file in *.csv; do
 	IFS="$OIFS"
 
 # Add date to first column
-	awk -F, '{$1="$qpcr_date" FS $1;}1' OFS=,
+	awk -F, '{$1='$qpcr_date' FS $1;}1' OFS=, "$file"
+	head -1 "$file"
 
 # Append new first column with filename.
 
