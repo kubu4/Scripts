@@ -28,13 +28,13 @@ for file in *.csv; do
 	# Pull date from filename
 	OIFS="$IFS"
 	IFS="_"
-	read -a qpcr_date <<< "${file}"
-	qpcr_date="${qpcr_date[1]}"
+	read -a file_array <<< "${file}"
+	qpcr_date="${file_array[1]}"
 	echo "$qpcr_date"
 	IFS="$OIFS"
 	
 	# Save qpcr filename to variable
-	qpcr_filename="${file/.csv/.pcrd}"
+	qpcr_filename=$(printf '%s_' "${file_array[@]}.pcrd")
 	echo "$qpcr_filename"
 	
 	# Remove header to allow for easier data appending.
