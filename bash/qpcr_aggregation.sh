@@ -7,10 +7,11 @@
 
 
 # Replace spaces with underscores in filenames
-for file in *.csv; do
+
+#for file in *.csv; do
 # Replace spaces with underscores in filenames
-	mv "$file" "${file// /_}"
-done
+#	mv "$file" "${file// /_}"
+#done
 
 # Pull date from filename
 for file in *.csv; do
