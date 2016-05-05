@@ -24,9 +24,7 @@ echo "$new_head"
 
 
 for file in *.csv; do
-	# Add qPCR_date header to first column
-	sed -i.old "1s/^.*$/$new_head/" "$file"
-	rm *.old
+	
 	# Pull date from filename
 	OIFS="$IFS"
 	IFS="_"
@@ -44,5 +42,10 @@ for file in *.csv; do
 # Append new first column with filename.
 	#awk -F, '{$1='$qpcr_date' FS $1;}1' OFS=, "$file"
 	#head -1 "$file"
+	
+# Add qPCR_date header to first column
+	sed -i.old "1s/^.*$/$new_head/" "$file"
+	rm *.old
+	
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
 done
