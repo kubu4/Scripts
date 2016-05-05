@@ -8,10 +8,10 @@
 
 # Replace spaces with underscores in filenames
 
-for file in *.csv; do
+#for file in *.csv; do
 # Replace spaces with underscores in filenames
-	mv "$file" "${file// /_}"
-done
+	#mv "$file" "${file// /_}"
+#done
 
 # Create new header with qPCR_date as first column name
 ## Hard-coded value containng the default header from all CFX Manager v.3.x exported CSV files
@@ -44,9 +44,9 @@ for file in *Quantification*.csv; do
 	# Add qPCR date to first column and output to .tmp file
 	for file1 in *.headless; do
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
-		# Append new first column with filename.
+		# Add new first column and append filename.
 		for file2 in *.tmp; do
-			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" > "${file2/.tmp/.tmp2}"
+			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> master.csv
 		done
 	done
 done
