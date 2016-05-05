@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Shell script to aggregate and format exported CSV data from BioRad CFX Manager v.3.x.
 
@@ -13,7 +13,9 @@ for file in *.csv; do
 	mv "$file" ${file// /}
 	
 # Pull date from filename
-	
+	IFS-""; read -ra qpcr_date <<< "$file"
+	qpcr_date=${qpcr_date[1]}
+	echo ${qpcr_date[1]}
 # Add date to first column
 	#awk -F, '{$1=1 FS $1;}1' OFS=,
 
