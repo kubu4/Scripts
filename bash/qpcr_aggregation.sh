@@ -25,6 +25,7 @@ echo "$new_head"
 # Pull date from filename
 for file in *.csv; do
 	sed -i.old "1s/^.*$/$new_head/" "$file"
+	rm *.old
 	OIFS="$IFS"
 	IFS="_"
 	read -a qpcr_date <<< "${file}"
