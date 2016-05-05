@@ -9,7 +9,7 @@
 # Replace spaces with underscores in filenames
 for file in *.csv; do
 # Replace spaces with underscores in filenames
-	#mv "$file" "${file// /_}"
+	mv "$file" "${file// /_}"
 	
 # Pull date from filename
 	OIFS="$IFS"
