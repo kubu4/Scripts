@@ -22,10 +22,10 @@ for file in *.csv; do
 	IFS="$OIFS"
 
 # Add date to first column
-	awk -F, '{$1='$qpcr_date' FS $1;}1' OFS=, "$file"
-	head -1 "$file"
+
 
 # Append new first column with filename.
-
+	#awk -F, '{$1='$qpcr_date' FS $1;}1' OFS=, "$file"
+	#head -1 "$file"
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
 done
