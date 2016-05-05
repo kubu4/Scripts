@@ -35,7 +35,9 @@ for file in *.csv; do
 done
 
 # Remove header to allow for easier data appending.
-
+for file in *.csv; do
+	awk 'NR>1' "$file" > "${file/.csv/.headless}"
+done
 	
 # Add qPCR date to first column
 	awk -v var="$qpcr_date" '{ print var$0 }' "$file" > "${file/.csv/.tmp}"
