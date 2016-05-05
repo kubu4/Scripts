@@ -13,5 +13,5 @@
 
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
 for file in *.csv; do
-	mv "$file" ${file// /}
+mv "$file" ${file// /}
 done
