@@ -8,10 +8,10 @@
 
 # Replace spaces with underscores in filenames
 
-#for file in *.csv; do
+for file in *.csv; do
 # Replace spaces with underscores in filenames
-#	mv "$file" "${file// /_}"
-#done
+	mv "$file" "${file// /_}"
+done
 
 # Create new header with qPCR_date as first column name
 ## Hard-coded value containng the default header from all CFX Manager v.3.x exported CSV files
@@ -23,7 +23,7 @@ echo "$old_head"
 echo "$new_head"
 
 
-for file in *.csv; do
+for file in *Quantification*.csv; do
 	
 	# Pull date from filename
 	OIFS="$IFS"
