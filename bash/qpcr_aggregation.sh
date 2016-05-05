@@ -47,6 +47,7 @@ for file in *.csv; do
 		for file2 in *.tmp; do
 			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" > "${file1/.tmp/.tmp2}"
 		done
+	done
 done
 
 	
