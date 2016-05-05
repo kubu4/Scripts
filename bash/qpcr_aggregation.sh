@@ -12,9 +12,13 @@ for file in *.csv; do
 	mv "$file" "${file// /_}"
 	
 # Pull date from filename
-	IFS="_"; read -ra qpcr_date <<< "$file"
+	OIFS="$IFS"
+	IFS="_"
+	read -a qpcr_date <<< "${file}"
 	qpcr_date=${qpcr_date[1]}
 	echo ${qpcr_date[1]}
+	IFS="$OIFS"
+
 # Add date to first column
 	#awk -F, '{$1=1 FS $1;}1' OFS=,
 
