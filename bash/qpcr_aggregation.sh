@@ -51,7 +51,7 @@ done
 
 	
 # Add qPCR_date header to first column
-	sed -i.old "1s/^.*$/$new_head/" "$file"
-	rm *.old
+	#sed -i.old "1s/^.*$/$new_head/" "$file"
+	#rm *.old
 	
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
