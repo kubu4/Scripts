@@ -17,7 +17,7 @@
 
 old_head=",Well,Fluor,Target,Content,Sample,Biological Set Name,Cq,Cq Mean,Cq Std. Dev,Starting Quantity (SQ),Log Starting Quantity,SQ Mean,SQ Std. Dev,Set Point,Well Note
 "
-new_head="$(awk 'NR==1 { print "qPCR_Date"$0 }')"
+new_head=$(awk 'NR==1 { print "qPCR_Date"$0 }')
 echo "$old_head"
 echo "$new_head"
 
