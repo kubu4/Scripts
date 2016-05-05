@@ -34,7 +34,7 @@ for file in *.csv; do
 	IFS="$OIFS"
 	
 	# Save qpcr filename to variable
-	qpcr_filename=$(printf '%s_' "${file_array[@]}.pcrd")
+	qpcr_filename=$(printf "${file_array[@]:0:4}")
 	echo "$qpcr_filename"
 	
 	# Remove header to allow for easier data appending.
