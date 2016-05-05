@@ -43,16 +43,12 @@ for file in *.csv; do
 	# Add qPCR date to first column and output to .tmp file
 	for file1 in *.headless; do
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
-	done
+		# Append new first column with filename.
+		for file in *.tmp; do
+			awk -F, '{$1='$qpcr_filename' FS $1;}1' OFS=, "$file"
+		done
 done
 
-	
-	
-
-# Append new first column with filename.
-for file in *.tmp; do
-	awk -F, '{$1='$qpcr_filename' FS $1;}1' OFS=, "$file"
-	
 	
 # Add qPCR_date header to first column
 	sed -i.old "1s/^.*$/$new_head/" "$file"
