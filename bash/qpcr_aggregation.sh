@@ -12,6 +12,6 @@
 # Append new first column with filename.
 
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
-for file in *.csv do
+for file in *.csv; do
 	mv "$file" ${file// /}
 done
