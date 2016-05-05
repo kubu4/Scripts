@@ -42,7 +42,7 @@ for file in *.csv; do
 	
 	# Add qPCR date to first column and output to .tmp file
 	for file1 in *.headless; do
-		awk -v var="$qpcr_date" '{ print var$0 }' "$file2" > "${file2/.headless/.tmp}"
+		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
 	done
 done
 
