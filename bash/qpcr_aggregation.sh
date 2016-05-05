@@ -5,13 +5,13 @@
 # Dependencies:
 # R script: CFX_Cq_Agg.R (https://github.com/kubu4/Scripts/blob/master/R/CFX_Cq_Agg.R)
 
-for file in *.csv do
 # Remove spaces from filenames
-	mv "$file" ${file// /}
+
 # Add date to first column
 
 # Append new first column with filename.
 
 # Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
-
+for file in *.csv do
+	mv "$file" ${file// /}
 done
