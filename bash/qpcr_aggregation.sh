@@ -32,8 +32,9 @@ for file in *.csv; do
 	qpcr_date="${qpcr_date[1]}"
 	echo "$qpcr_date"
 	IFS="$OIFS"
-
-
+done
+echo "$qpcr_date"
+# Remove header to allow for easier data appending.
 
 	
 # Add qPCR date to first column
