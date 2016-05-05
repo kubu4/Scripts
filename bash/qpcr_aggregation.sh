@@ -10,12 +10,12 @@
 
 for file in *.csv; do
 # Replace spaces with underscores in filenames
-	mv "$file" ${file// /_}
+	mv "$file" ${file// /}
 	
 # Pull date from filename
-	IFS="_"; read -ra qpcr_date <<< "$file"
-	qpcr_date=${qpcr_date[1]}
-	echo ${qpcr_date[1]}
+	#IFS="_"; read -ra qpcr_date <<< "$file"
+	#qpcr_date=${qpcr_date[1]}
+	#echo ${qpcr_date[1]}
 # Add date to first column
 	#awk -F, '{$1=1 FS $1;}1' OFS=,
 
