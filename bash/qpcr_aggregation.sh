@@ -36,12 +36,11 @@ for file in *.csv; do
 	# Save qpcr filename to variable
 	qpcr_filename="${file/.csv/.pcrd}"
 	echo "$qpcr_filename"
-done
-
-# Remove header to allow for easier data appending.
-for file in *.csv; do
+	
+	# Remove header to allow for easier data appending.
 	awk 'NR>1' "$file" > "${file/.csv/.headless}"
 done
+
 	
 # Add qPCR date to first column and output to .tmp file
 for file in *.headless; do
