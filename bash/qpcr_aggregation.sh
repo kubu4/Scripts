@@ -10,8 +10,10 @@
 for file in *.csv; do
 # Replace spaces with underscores in filenames
 	mv "$file" "${file// /_}"
-	
+done
+
 # Pull date from filename
+for file in *.csv; do
 	OIFS="$IFS"
 	IFS="_"
 	read -a qpcr_date <<< "${file}"
