@@ -22,10 +22,12 @@ new_head="$(awk 'NR==1 { print "qPCR_Date"$0 }' old_head.tmp)"
 echo "$old_head"
 echo "$new_head"
 
-# Pull date from filename
+
 for file in *.csv; do
+	# Add qPCR_date header to first column
 	sed -i.old "1s/^.*$/$new_head/" "$file"
 	rm *.old
+	# Pull date from filename
 	OIFS="$IFS"
 	IFS="_"
 	read -a qpcr_date <<< "${file}"
@@ -33,7 +35,7 @@ for file in *.csv; do
 	echo "$qpcr_date"
 	IFS="$OIFS"
 
-# Add qPCR_date header to first column
+
 
 	
 # Add qPCR date to first column
