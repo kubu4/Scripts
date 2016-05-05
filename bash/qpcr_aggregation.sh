@@ -14,7 +14,7 @@
 #done
 
 # Create new header with qPCR_date as first column name
-
+## Hard-coded value containng the default header from all CFX Manager v.3.x exported CSV files
 old_head=",Well,Fluor,Target,Content,Sample,Biological Set Name,Cq,Cq Mean,Cq Std. Dev,Starting Quantity (SQ),Log Starting Quantity,SQ Mean,SQ Std. Dev,Set Point,Well Note
 "
 echo "$old_head" > old_head.tmp
@@ -24,6 +24,7 @@ echo "$new_head"
 
 # Pull date from filename
 for file in *.csv; do
+	sed -i.old "1s/^.*$/$new_head/" "$file"
 	OIFS="$IFS"
 	IFS="_"
 	read -a qpcr_date <<< "${file}"
