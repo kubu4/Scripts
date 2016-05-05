@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Shell script to aggregate and format exported CSV data from BioRad CFX Manager v.3.x.
-
-# Dependencies:
-# R script: CFX_Cq_Agg.R (https://github.com/kubu4/Scripts/blob/master/R/CFX_Cq_Agg.R)
+# This script will:
+# - Replace the spaces in the BioRad filenames
+# - Replace the header row to accommodate two new fields: qPCR_filename and qPCR_date
+# - Concatenate all the files into a single "master" CSV file.
 
 
 # Replace spaces with underscores in filenames
 
-#for file in *.csv; do
-# Replace spaces with underscores in filenames
-	#mv "$file" "${file// /_}"
-#done
+for file in *.csv; do
+	mv "$file" "${file// /_}"
+done
 
 # Create new header with qPCR_date as first column name
 ## Hard-coded value containng the default header from all CFX Manager v.3.x exported CSV files
@@ -52,8 +52,6 @@ for file in *Quantification*.csv; do
 done
 
 	
-# Add qPCR_date header to first column
+# Add header
 	sed -i.old "1s/^.*$/$new_head/" master.csv
 	rm *.old
-	
-# Run Rscript (CFX_Cq_Agg.R) to combine replicate Cq data on single line
