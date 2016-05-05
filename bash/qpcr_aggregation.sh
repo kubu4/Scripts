@@ -17,34 +17,58 @@ done
 ## Hard-coded value containng the default header from all CFX Manager v.3.x exported CSV files
 old_head=",Well,Fluor,Target,Content,Sample,Biological Set Name,Cq,Cq Mean,Cq Std. Dev,Starting Quantity (SQ),Log Starting Quantity,SQ Mean,SQ Std. Dev,Set Point,Well Note
 "
+## Write the $old_head contents to a temporary file.
 echo "$old_head" > old_head.tmp
+
+## Takes $old_head.tmp as input.
+## Use awk to operate on the first line (the only line, in this particular case) of the input file and append two new header
+## values (qPCR_filename and qPCR_Date) to the beginning of the rest of the header values.
 new_head="$(awk 'NR==1 { print "qPCR_filename,qPCR_Date"$0 }' old_head.tmp)" 
 echo "$old_head"
 echo "$new_head"
 
 
+# Remove headers from files, add new columns, fill columns with appropriate data
+# for corresponding fields and concatenates all processed files into a single CSV file.
+## Takes BioRad CSV files as input.
 for file in *Quantification*.csv; do
 	
-	# Pull date from filename
+	### Pull date from filename.
+	### Create an array ($file_array) using underscore as delimiter (field separator [IFS]).
 	OIFS="$IFS"
 	IFS="_"
 	read -a file_array <<< "${file}"
+	
+	### Store the value of file_array at index 1.
 	qpcr_date="${file_array[1]}"
 	echo "$qpcr_date"
+	
+	### Set IFS back to original (i.e. system default) field separator.
 	IFS="$OIFS"
 	
-	# Save qpcr filename to variable
+	### Save qpcr filename to variable.
+	### Slice array from indices 0-4, print them and store in qpcr_filename.
 	qpcr_filename=$(printf "${file_array[@]:0:4}")
+	
+	### Use parameter substitution to replace spaces with underscore, and append .pcrd to contents of variable.
 	qpcr_filename="${qpcr_filename// /_}.pcrd"
 	echo "$qpcr_filename"
 	
-	# Remove header to allow for easier data appending.
+	### Remove header to allow for easier data appending.
+	### Use awk to capture all records (i.e. rows), except the first row.
+	### Saved to file with .headless extension.
 	awk 'NR>1' "$file" > "${file/.csv/.headless}"
 	
-	# Add qPCR date to first column and output to .tmp file
+	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
 	for file1 in *.headless; do
+		
+		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
+		### Output to filename with .tmp extension.
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
-		# Add new first column and append filename.
+		
+		### Add new first column and append filename to .tmp files created in previous step.
+		### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
+		### Concatenate output to master.csv file.
 		for file2 in *.tmp; do
 			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> master.csv
 		done
@@ -53,5 +77,8 @@ done
 
 	
 # Add header
-	sed -i.old "1s/^.*$/$new_head/" master.csv
-	rm *.old
+## Takes master.csv as input.
+## Use sed to edit master.csv "in place" and create a backup file with .old extension (-i.old).
+## Sed inserts $new_head above the first line of master.csv and then deletes the backup file.
+sed -i.old "1s/^.*$/$new_head/" master.csv
+rm *.old
