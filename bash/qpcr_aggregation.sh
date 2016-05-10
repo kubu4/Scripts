@@ -65,7 +65,7 @@ for file in *Quantification*.csv; do
 	### Remove header to allow for easier data appending.
 	### Use awk to capture all records (i.e. rows), except the first row.
 	### Use parameter substitution to replace .csv extension of output file with .headless extension.
-	headless="$(awk 'NR>1' "$file" > "${file/.csv/.headless}")"
+	######headless="$(awk 'NR>1' "$file" > "${file/.csv/.headless}")"
 	echo "Headless var: $headless"
 	echo "Pre-headless: $qpcr_date"
 
@@ -88,6 +88,7 @@ for file in *Quantification*.csv; do
 	######for file2 in *.tmp; do
 		######awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> "$master_list"
 	#######done
+	let "outer+=1"    # Increment outer loop counter. 
 done
 
 	
