@@ -8,7 +8,7 @@
 # - Concatenate all the files into a single "master" CSV file.
 
 
-# Replace spaces with underscores in filenames
+# Replace spaces in filenames with underscores.
 
 for file in *.csv; do
 	mv "$file" "${file// /_}"
