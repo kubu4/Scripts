@@ -30,12 +30,17 @@ new_head="$(awk 'NR==1 { print "qPCR_filename,qPCR_Date"$0 }' old_head.tmp)"
 echo "$old_head"
 echo "$new_head"
 
+outer=1 # Set outer loop counter.
 
 # Remove headers from files, add new columns, fill columns with appropriate data
 # for corresponding fields and concatenates all processed files into a single CSV file.
 ## Takes BioRad CSV files as input.
 for file in *Quantification*.csv; do
 	
+
+	echo "Pass $outer in outer loop."
+	echo "---------------------"
+
 	### Pull date from filename.
 	### Create an array ($file_array) using underscore as delimiter (field separator [IFS]).
 	OIFS="$IFS"
@@ -63,8 +68,13 @@ for file in *Quantification*.csv; do
 	headless="$(awk 'NR>1' "$file" > "${file/.csv/.headless}")"
 	echo "Headless var: $headless"
 	echo "Pre-headless: $qpcr_date"
+
+	inner=1 # Initiate inner loop counter.
+
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
 	for file1 in *.headless; do
+		echo "Pass $inner in inner loop."
+    		let "inner+=1"  # Increment inner loop counter.
 		echo "Head in date: $qpcr_date"		
 		echo "File1 variable: $file1"
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
