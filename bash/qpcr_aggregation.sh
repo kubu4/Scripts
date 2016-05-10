@@ -4,6 +4,7 @@
 # This script will:
 # - Replace the spaces in the BioRad filenames
 # - Replace the header row to accommodate two new fields: qPCR_filename and qPCR_date
+# - Append the filename and the qPCR date to the new columns
 # - Concatenate all the files into a single "master" CSV file.
 
 
