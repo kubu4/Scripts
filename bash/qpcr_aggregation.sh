@@ -64,7 +64,7 @@ for file in *Quantification*.csv; do
 	
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
 	for file1 in *.headless; do
-		echo "$file1"
+		echo "File1 variable: $file1"
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
 		### Use pareeter substitution to output to filename with .tmp extension.
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
