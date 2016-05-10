@@ -53,7 +53,7 @@ for file in *Quantification*.csv; do
 	### Parameter expansion/substitution to remove end of .csv filename
 	qpcr_filename="${file//_-__Quantification_Cq_Results_0/}.pcrd"
 	echo "Parameter subsitution 1: $qpcr_filename"
-	qpcr_filename="${file//.csv/.pcrd}"
+	qpcr_filename="${qpcr_filename//.csv/.pcrd}"
 	echo "Parameter subsitution 2: $qpcr_filename"
 
 	
