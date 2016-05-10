@@ -9,11 +9,9 @@
 
 
 # Set final output filename
-
 master_list="qPCR_master_list_messy.csv"
 
 # Replace spaces in filenames with underscores.
-
 for file in *.csv; do
 	mv "$file" "${file// /_}"
 done
