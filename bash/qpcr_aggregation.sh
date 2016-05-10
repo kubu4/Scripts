@@ -50,9 +50,9 @@ for file in *Quantification*.csv; do
 	IFS="$OIFS"
 	
 	### Save qpcr filename to variable.
-	### Slice array from indices 0-4, print them and store in qpcr_filename.
-	qpcr_filename=$(printf "%s_%s\b" "${file_array[0]}" "${file_array[@]:1:4}")
-	echo "From array: $qpcr_filename"
+	### Parameter expansion/substitution to remove end of .csv filename
+	qpcr_filename="${file%%_-__Quantification_Cq_Results_0.csv}"
+	echo "Parameter subsitution: $qpcr_filename"
 	### Use parameter substitution to replace spaces with underscore, and append .pcrd to contents of variable.
 	qpcr_filename="${qpcr_filename// /_}.pcrd"
 	echo "After substitution: $qpcr_filename"
