@@ -67,10 +67,7 @@ for file in *Quantification*.csv; do
 	### Use awk to capture all records (i.e. rows), except the first row.
 	### Use parameter substitution to replace .csv extension of output file with .headless extension.
 	######headless="$(awk 'NR>1' "$file" > "${file/.csv/.headless}")"
-	echo "Headless var: $headless"
 	echo "Pre-headless: $qpcr_date"
-
-	
 
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
 	for file1 in *.headless; do
