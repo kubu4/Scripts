@@ -66,7 +66,7 @@ for file in *Quantification*.csv; do
 	### Remove header to allow for easier data appending.
 	### Use awk to capture all records (i.e. rows), except the first row.
 	### Use parameter substitution to replace .csv extension of output file with .headless extension.
-	######headless="$(awk 'NR>1' "$file" > "${file/.csv/.headless}")"
+	$(awk 'NR>1' "$file" > "${file/.csv/.headless}")
 	echo "Pre-headless: $qpcr_date"
 
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
@@ -74,7 +74,7 @@ for file in *Quantification*.csv; do
 		echo "Pass $inner in inner loop."
     		let "inner+=1"  # Increment inner loop counter.
 		echo "Head in date: $qpcr_date"		
-		echo "File1 variable: $file1"
+		echo "File1: $file1"
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
 		### Use pareeter substitution to output to filename with .tmp extension.
 		######awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
