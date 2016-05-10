@@ -75,7 +75,7 @@ for file in *Quantification*.csv; do
 	### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
 	### Concatenate output to master.csv file.
 	for file2 in *.tmp; do
-		awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
+		awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> "$master_list"
 	done
 done
 
@@ -84,5 +84,5 @@ done
 ## Takes $master_list (.csv file) as input.
 ## Use sed to edit $master_list "in place" and create a backup file with .old extension (-i.old).
 ## Sed inserts $new_head above the first line of $master_list and then deletes the backup file.
-sed -i.old "1s/^.*$/$new_head/" $master_list
+sed -i.old "1s/^.*$/$new_head/" "$master_list"
 rm *.old
