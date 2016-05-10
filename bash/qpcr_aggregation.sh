@@ -44,7 +44,7 @@ for file in *Quantification*.csv; do
 	
 	### Store the value of file_array at index 1.
 	qpcr_date="${file_array[1]}"
-	echo "$qpcr_date"
+	echo "qPCR Date: $qpcr_date"
 	
 	### Set IFS back to original (i.e. system default) field separator.
 	IFS="$OIFS"
