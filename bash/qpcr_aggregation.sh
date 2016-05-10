@@ -31,6 +31,7 @@ echo "$old_head"
 echo "$new_head"
 
 outer=1 # Set outer loop counter.
+inner=1 # Set inner loop counter.
 
 # Remove headers from files, add new columns, fill columns with appropriate data
 # for corresponding fields and concatenates all processed files into a single CSV file.
@@ -69,7 +70,7 @@ for file in *Quantification*.csv; do
 	echo "Headless var: $headless"
 	echo "Pre-headless: $qpcr_date"
 
-	inner=1 # Initiate inner loop counter.
+	
 
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
 	for file1 in *.headless; do
