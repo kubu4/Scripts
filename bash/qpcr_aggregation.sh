@@ -68,13 +68,12 @@ for file in *Quantification*.csv; do
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
 		### Use pareeter substitution to output to filename with .tmp extension.
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
-		
-		### Add new first column and append filename to .tmp files created in previous step.
-		### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
-		### Concatenate output to master.csv file.
-		for file2 in *.tmp; do
-			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
-		done
+	done	
+	### Add new first column and append filename to .tmp files created in previous step.
+	### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
+	### Concatenate output to master.csv file.
+	for file2 in *.tmp; do
+		awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
 	done
 done
 
