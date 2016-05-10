@@ -52,36 +52,36 @@ for file in *Quantification*.csv; do
 	### Save qpcr filename to variable.
 	### Slice array from indices 0-4, print them and store in qpcr_filename.
 	qpcr_filename=$(printf "${file_array[@]:0:4}")
-	
+	echo "From array: $qpcr_filename"
 	### Use parameter substitution to replace spaces with underscore, and append .pcrd to contents of variable.
 	qpcr_filename="${qpcr_filename// /_}.pcrd"
-	echo "$qpcr_filename"
+	echo "After substitution: $qpcr_filename"
 	
 	### Remove header to allow for easier data appending.
 	### Use awk to capture all records (i.e. rows), except the first row.
 	### Use parameter substitution to replace .csv extension of output file with .headless extension.
-	awk 'NR>1' "$file" > "${file/.csv/.headless}"
+	#########awk 'NR>1' "$file" > "${file/.csv/.headless}"
 	
 	### Add qPCR date to first column of .headless files created in previous step and output to .tmp file
-	for file1 in *.headless; do
+	########for file1 in *.headless; do
 		
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
 		### Use pareeter substitution to output to filename with .tmp extension.
-		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
+		#######awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
 		
 		### Add new first column and append filename to .tmp files created in previous step.
 		### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
 		### Concatenate output to master.csv file.
-		for file2 in *.tmp; do
-			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
-		done
-	done
+		#######for file2 in *.tmp; do
+			######awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
+		######done
+	#######done
 done
 
 	
 # Add header
 ## Takes $master_list (.csv file) as input.
 ## Use sed to edit $master_list "in place" and create a backup file with .old extension (-i.old).
-## Sed inserts $new_head above the first line of master.csv and then deletes the backup file.
-sed -i.old "1s/^.*$/$new_head/" $master_list
-rm *.old
+## Sed inserts $new_head above the first line of $master_list and then deletes the backup file.
+#######sed -i.old "1s/^.*$/$new_head/" $master_list
+#######rm *.old
