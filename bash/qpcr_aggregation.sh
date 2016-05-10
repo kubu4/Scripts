@@ -80,8 +80,8 @@ done
 
 	
 # Add header
-## Takes master.csv as input.
-## Use sed to edit master.csv "in place" and create a backup file with .old extension (-i.old).
+## Takes $master_list (.csv file) as input.
+## Use sed to edit $master_list "in place" and create a backup file with .old extension (-i.old).
 ## Sed inserts $new_head above the first line of master.csv and then deletes the backup file.
 sed -i.old "1s/^.*$/$new_head/" $master_list
 rm *.old
