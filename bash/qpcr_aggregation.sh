@@ -8,6 +8,10 @@
 # - Concatenate all the files into a single "master" CSV file.
 
 
+# Set final output filename
+
+master_list="qPCR_master_list_messy"
+
 # Replace spaces in filenames with underscores.
 
 for file in *.csv; do
@@ -71,7 +75,7 @@ for file in *Quantification*.csv; do
 		### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
 		### Concatenate output to master.csv file.
 		for file2 in *.tmp; do
-			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> master.csv
+			awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> $master_list
 		done
 	done
 done
@@ -81,5 +85,5 @@ done
 ## Takes master.csv as input.
 ## Use sed to edit master.csv "in place" and create a backup file with .old extension (-i.old).
 ## Sed inserts $new_head above the first line of master.csv and then deletes the backup file.
-sed -i.old "1s/^.*$/$new_head/" master.csv
+sed -i.old "1s/^.*$/$new_head/" $master_list
 rm *.old
