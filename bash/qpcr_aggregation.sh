@@ -28,6 +28,7 @@ echo "$old_head" > old_head.tmp
 ## values (qPCR_filename and qPCR_Date) to the beginning of the rest of the header values.
 new_head="$(awk 'NR==1 { print "qPCR_filename,qPCR_Date"$0 }' old_head.tmp)" 
 echo "$old_head"
+echo ""
 echo "$new_head"
 
 outer=1 # Set outer loop counter.
