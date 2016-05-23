@@ -76,9 +76,10 @@ for file in *Quantification*.csv; do
 		echo "Head in date: $qpcr_date"		
 		echo "File1: $file1"
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
-		### Use pareeter substitution to output to filename with .tmp extension.
-		######awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
-		######echo "Head out date: $qpcr_date"
+		### Use parameter substitution to output to filename with .tmp extension.
+		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
+		echo "Head out date: $qpcr_date"
+		rm "$file1"
 	done	
 	### Add new first column and append filename to .tmp files created in previous step.
 	### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
