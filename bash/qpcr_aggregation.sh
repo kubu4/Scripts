@@ -79,6 +79,7 @@ for file in *Quantification*.csv; do
 		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
 		### Use parameter substitution to output to filename with .tmp extension.
 		awk -v var="$qpcr_date" '{ print var$0 }' "$file1" > "${file1/.headless/.tmp}"
+		awk -v var="$qpcr_date" '{ print var }'
 		echo "Head out date: $qpcr_date"
 		rm "$file1"
 	done	
