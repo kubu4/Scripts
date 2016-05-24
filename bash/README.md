@@ -20,4 +20,5 @@ A script to backup Roberts Lab online notebooks.
 
 ---
 #### qpcr_aggregation.sh
+- Not functional. Still in development. -
 A script to format & combine CSV files exported from BioRad CFX Manager v3.0 qPCR files.
