@@ -76,18 +76,13 @@ for file in *Quantification*.csv; do
     		let "inner+=1"  # Increment inner loop counter.
 		echo "Head in date: $qpcr_date"		
 		echo "File1: $file1"
-		### Pass bash variable ($qpcr_date) to awk, and append the value to the beginning of all records.
-		### Use parameter substitution to output to filename with .tmp extension.
+		
+	### Pass bash variables ($qpcr_filename, $qpcr_date) to awk, and append the values to the beginning of all records.
+		### Use parameter substitution to output to filename with .tmp extension and concatenate output to master .csv file.
 		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | tee "${file1/.headless/.tmp}" >> "$master_list"
 		echo "Head out date: $qpcr_date"
 		rm "$file1"
 	done	
-	### Add new first column and append filename to .tmp files created in previous step.
-	### Pass bash variable ($qpcr_filename) to awk, and append value to new column.
-	### Concatenate output to master.csv file.
-	#######for file2 in *.tmp; do
-		#######awk -F, -v var="$qpcr_filename" '{$1=var FS $1;}1' OFS=, "$file2" >> "$master_list"
-	#######done
 	let "outer+=1"    # Increment outer loop counter. 
 done
 
