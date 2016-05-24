@@ -77,7 +77,7 @@ for file in *Quantification*.csv; do
 		echo "Head in date: $qpcr_date"		
 		echo "File1: $file1"
 		
-	### Pass bash variables ($qpcr_filename, $qpcr_date) to awk, and append the values to the beginning of all records.
+		### Pass bash variables ($qpcr_filename, $qpcr_date) to awk, and append the values to the beginning of all records.
 		### Use parameter substitution to output to filename with .tmp extension and concatenate output to master .csv file.
 		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | tee "${file1/.headless/.tmp}" >> "$master_list"
 		echo "Head out date: $qpcr_date"
