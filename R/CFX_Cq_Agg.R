@@ -13,22 +13,24 @@
 
 CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)   {
   
-  temp.dataframe <- cbind(dataframe[ , 1:(cq.column - 1)], dataframe[,(cq.column + 1) : 
-                                                                       length(dataframe)], dataframe[,cq.column]) # Rearranges supplied dataframe to put CQ values in last column
+  temp.dataframe <- subset(dataframe, select = c("Well", "Fluor", "Target", "Content", "Sample", "Biological.Set.Name", "Cq.Mean", "Cq.Std..Dev", "Starting.Quantity..SQ.", 
+                                                 "Log.Starting.Quantity", "SQ.Mean", "SQ.Std..Dev", "Set.Point", "Well.Note", "Cq")) # Rearranges supplied dataframe to put CQ values in last column
   
-  temp.dataframe <- temp.dataframe[order(temp.dataframe$Content),] ## Orders dataframe
-  
+  temp.dataframe <- temp.dataframe[order(temp.dataframe$Content),]
   output.df2 <- temp.dataframe[1,] ## Initilizes the return data frame with the first row of qPCR information
   rowcounter <- 2 # Index for keeping track of the row of the new data frame currently being operated on (Sample label)
   columncounter <- length(temp.dataframe) + 1 ## Index for keeping track of column of new data frame being operated on (individual cq values)
   
+  
+  
   ## Main for loop that iterates through the supplied data frame one row at a time.
-  for(i in 2:length(temp.dataframe[,1]))  {
+  for(i in 2:length(temp.dataframe$Content))  {
+    
     
     ## Main logical test, checking if the current sample label is the same as the previous sample label. If so, appends
     ## current Cq value to the end of the return data frame and increments columncounter by 1
-    if(temp.dataframe[i,label.column] == temp.dataframe[i - 1, label.column])   {
-      output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(dataframe)]
+    if(temp.dataframe$Content[i] == temp.dataframe$Content[(i - 1)])   {
+      output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(temp.dataframe)]
       columncounter <- columncounter + 1
       
       ## Fork for failed if tests, creates a new row in the return data frame with the new sample label, increments rowcounter
@@ -45,5 +47,5 @@ CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)
     return(output.df2)
   } else # Else fork, when filename == TRUE, outputs the dataframe to a csv file with a user supplied filename
     filename <- readline("Input file name for saving, include .csv in the filename (ex. test.csv):  ") #Queries user for filename
-  write.csv(output.df2, filename )
+  write.csv(output.df2, filename)
 }
