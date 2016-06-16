@@ -1,7 +1,7 @@
 ##Originally created by Sean Bennett at the Univ. of Washington
 
 ## Function CQagg takes arguments dataframe (data construct containing your data), 
-## Content.column(column index containing sample label (std1, unkn-1, etc)), and cq.column(column where cq values are located).
+## label.column(column index containing sample label (std1, unkn-1, etc)), and cq.column(column where cq values are located).
 ## A True/False flag filename allows user to chose either outputting to a .csv file, requesting the filename wanted,
 ## or just a generic return of the data frame.
 
@@ -11,21 +11,26 @@
 ## 3rd+ replicate of the experimentals. If that's an issue, I can probably coerce a ragged array 
 ## (array that does not have constant length in a dimension) but I don't know how that would output.
 
-CQagg <- function(dataframe, Content.column = 6 , cq.column = 9, filename = FALSE)   {
+CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)   {
   
-  temp.dataframe <- cbind(dataframe[ , 1:(cq.column - 1)], dataframe[,(cq.column + 1) : 
-                                                                       length(dataframe)], dataframe[,cq.column]) # Rearranges supplied dataframe to put CQ values in last column
+  temp.dataframe <- subset(dataframe, select = c("qPCR_filename", "qPCR_Date", "Well", "Fluor", "Target", "Content", "Sample", "Biological.Set.Name", "Cq.Mean", "Cq.Std..Dev", "Starting.Quantity..SQ.", 
+                                                 "Log.Starting.Quantity", "SQ.Mean", "SQ.Std..Dev", "Set.Point", "Well.Note", "Cq")) # Rearranges supplied dataframe to put CQ values in last column
+  
+  temp.dataframe <- temp.dataframe[order(temp.dataframe$Content),]
   output.df2 <- temp.dataframe[1,] ## Initilizes the return data frame with the first row of qPCR information
   rowcounter <- 2 # Index for keeping track of the row of the new data frame currently being operated on (Sample label)
   columncounter <- length(temp.dataframe) + 1 ## Index for keeping track of column of new data frame being operated on (individual cq values)
   
+  
+  
   ## Main for loop that iterates through the supplied data frame one row at a time.
-  for(i in 2:length(temp.dataframe[,1]))  {
+  for(i in 2:length(temp.dataframe$Content))  {
+    
     
     ## Main logical test, checking if the current sample label is the same as the previous sample label. If so, appends
     ## current Cq value to the end of the return data frame and increments columncounter by 1
-    if(temp.dataframe[i,Content.column] == temp.dataframe[i - 1, Content.column])   {
-      output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(dataframe)]
+    if(temp.dataframe$Content[i] == temp.dataframe$Content[(i - 1)])   {
+      output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(temp.dataframe)]
       columncounter <- columncounter + 1
       
       ## Fork for failed if tests, creates a new row in the return data frame with the new sample label, increments rowcounter
@@ -42,5 +47,5 @@ CQagg <- function(dataframe, Content.column = 6 , cq.column = 9, filename = FALS
     return(output.df2)
   } else # Else fork, when filename == TRUE, outputs the dataframe to a csv file with a user supplied filename
     filename <- readline("Input file name for saving, include .csv in the filename (ex. test.csv):  ") #Queries user for filename
-  write.csv(output.df2, filename )
+  write.csv(output.df2, filename)
 }
