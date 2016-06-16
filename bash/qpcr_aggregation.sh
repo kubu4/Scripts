@@ -94,3 +94,4 @@ done
 ## Sed inserts $new_head above the first line of $master_list and then deletes the backup file.
 sed -i.old "1s/^.*$/$new_head/" "$master_list"
 rm *.old
+rm *.tmp
