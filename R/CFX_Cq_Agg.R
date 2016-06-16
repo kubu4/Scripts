@@ -1,7 +1,7 @@
 ##Originally created by Sean Bennett at the Univ. of Washington
 
 ## Function CQagg takes arguments dataframe (data construct containing your data), 
-## label.column(column index containing sample label (std1, unkn-1, etc)), and cq.column(column where cq values are located).
+## Content.column(column index containing sample label (std1, unkn-1, etc)), and cq.column(column where cq values are located).
 ## A True/False flag filename allows user to chose either outputting to a .csv file, requesting the filename wanted,
 ## or just a generic return of the data frame.
 
@@ -11,7 +11,7 @@
 ## 3rd+ replicate of the experimentals. If that's an issue, I can probably coerce a ragged array 
 ## (array that does not have constant length in a dimension) but I don't know how that would output.
 
-CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)   {
+CQagg <- function(dataframe, Content.column = 6 , cq.column = 9, filename = FALSE)   {
   
   temp.dataframe <- cbind(dataframe[ , 1:(cq.column - 1)], dataframe[,(cq.column + 1) : 
                                                                        length(dataframe)], dataframe[,cq.column]) # Rearranges supplied dataframe to put CQ values in last column
@@ -24,7 +24,7 @@ CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)
     
     ## Main logical test, checking if the current sample label is the same as the previous sample label. If so, appends
     ## current Cq value to the end of the return data frame and increments columncounter by 1
-    if(temp.dataframe[i,label.column] == temp.dataframe[i - 1, label.column])   {
+    if(temp.dataframe[i,Content.column] == temp.dataframe[i - 1, Content.column])   {
       output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(dataframe)]
       columncounter <- columncounter + 1
       
