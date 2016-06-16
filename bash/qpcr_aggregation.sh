@@ -80,7 +80,7 @@ for file in *Quantification*.csv; do
 		### Pass bash variables ($qpcr_filename, $qpcr_date) to awk, and append the values to the beginning of all records.
 		### Sort output on fields 5, 6, then 7 (Target, Content, then Sample).
 		### Use parameter substitution to output to filename with .tmp extension and concatenate output to master .csv file.
-		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | sort --field-separator, -k5,5 -k6,6 -k7,7 | tee "${file1/.headless/.tmp}" >> "$master_list"
+		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | sort --field-separator=, -k5,5 -k6,6 -k7,7 | tee "${file1/.headless/.tmp}" >> "$master_list"
 		echo "Head out date: $qpcr_date"
 		rm "$file1"
 	done	
