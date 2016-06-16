@@ -11,7 +11,7 @@
 ## 3rd+ replicate of the experimentals. If that's an issue, I can probably coerce a ragged array 
 ## (array that does not have constant length in a dimension) but I don't know how that would output.
 
-CQagg <- function(dataframe, label.column = 5 , cq.column = 8, filename = FALSE)   {
+CQagg <- function(dataframe, label.column = 6 , cq.column = 9, filename = FALSE)   {
   
   temp.dataframe <- subset(dataframe, select = c("qPCR_filename", "qPCR_Date", "Well", "Fluor", "Target", "Content", "Sample", "Biological.Set.Name", "Cq.Mean", "Cq.Std..Dev", "Starting.Quantity..SQ.", 
                                                  "Log.Starting.Quantity", "SQ.Mean", "SQ.Std..Dev", "Set.Point", "Well.Note", "Cq")) # Rearranges supplied dataframe to put CQ values in last column
