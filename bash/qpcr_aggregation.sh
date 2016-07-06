@@ -91,7 +91,9 @@ done
 # Add header
 ## Takes $master_list (.csv file) as input.
 ## Use sed to edit $master_list "in place" and create a backup file with .old extension (-i.old).
-## Sed inserts $new_head above the first line of $master_list and then deletes the backup file.
+## Sed inserts $new_head above the first line of $master_list.
+## Sed then removes any hidden Windows newline characters (^M; represented by \r)
+## and then deletes the backup file.
 sed -i.old "1s/^.*$/$new_head/" "$master_list"
 sed -i.old $'s/\r//' "$master_list"
 rm *.old
