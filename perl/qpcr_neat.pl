@@ -22,7 +22,7 @@ my @data = ();
 
 # Set up the first line, need to initialize these to start 
 # with the looping. We're basically saving the whole line ($curr_line = <$in>),
-# removing any newline characters (chomp($curr_line), and then splitting the line
+# removing any newline characters (chomp($curr_line)), and then splitting the line
 # on commas to save each field in an array (@data = split(/,/, $curr_line)).
 # This also stores the values in column 6 (Content column - $data[5]) and 
 # column 7 (Sample column - $data[6]).
