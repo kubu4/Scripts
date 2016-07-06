@@ -28,7 +28,8 @@ while (my $line = <$in>) {
     # Spliting the columns at each comma
     my @data = split(/,/, $line);
 
-    # Append to current line if c3 equals, otherwise set 
+    # Append to current line if Content (column 6) on one line equals Content on the next line
+    #, otherwise set 
     # our looping variables to new ones
     if ($curr_content eq $data[5]) {
         $curr_line = $curr_line . "," . $data[8];
