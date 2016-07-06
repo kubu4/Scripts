@@ -1,5 +1,12 @@
 #!/usr/bin/perl
 
+# This script was originally created by Giles Goetz @ the NOAA Northwest Fisheries
+# Science Center (NFSC).
+
+# This perl script takes the output file from the bash script: qpcr_aggregation.sh
+# The script identifies qPCR replicates and consolidates the Cq value from each replicate
+# to a single line. 
+
 use warnings;
 use strict;
 
@@ -14,8 +21,11 @@ my $curr_line = "";
 my @data = ();
 
 # Set up the first line, need to initialize these to start 
-# with the looping. We're basically saving the whole line
-# as well as what is stored in columns 6 (Content column) and 7 (Sample column).
+# with the looping. We're basically saving the whole line ($curr_line = <$in>),
+# removing any newline characters (chomp($curr_line), and then splitting the line
+# on commas to save each field in an array (@data = split(/,/, $curr_line)).
+# This also stores the values in column 6 (Content column - $data[5]) and 
+# column 7 (Sample column - $data[6]).
 $curr_line = <$in>;
 chomp($curr_line);
 @data = split(/,/, $curr_line);
@@ -36,7 +46,7 @@ while (my $line = <$in>) {
     if ($curr_content eq $data[5] && $curr_sample eq $data[6]) {
         $curr_line = $curr_line . "," . $data[8];
     } else {
-        # Print what we've saved sofar before we reset
+        # Print what we've saved so far before we reset
         print $curr_line . "\n";
 
         # Now set everything to new values
