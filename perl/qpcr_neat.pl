@@ -8,17 +8,17 @@ my $input = shift(@ARGV);
 open(my $in, "<", $input);
 
 # Initialize some variables for looping
-my $curr_c3 = "";
+my $curr_content = "";
 my $curr_line = "";
 my @data = ();
 
 # Set up the first line, need to initialize these to start 
 # with the looping. We're basically saving the whole line
-# as well as what is stored in column 3.
+# as well as what is stored in column 6 (Content column).
 $curr_line = <$in>;
 chomp($curr_line);
 @data = split(/,/, $curr_line);
-$curr_c3 = $data[2];
+$curr_content = $data[5];
 
 # Loop through every line in the file
 while (my $line = <$in>) {
@@ -30,14 +30,14 @@ while (my $line = <$in>) {
 
     # Append to current line if c3 equals, otherwise set 
     # our looping variables to new ones
-    if ($curr_c3 eq $data[2]) {
-        $curr_line = $curr_line . "," . $data[3];
+    if ($curr_content eq $data[5]) {
+        $curr_line = $curr_line . "," . $data[8];
     } else {
         # Print what we've saved sofar before we reset
         print $curr_line . "\n";
 
         # Now set everything to new values
-        $curr_c3 = $data[2];
+        $curr_content = $data[5];
         $curr_line = $line;
     }
 }
