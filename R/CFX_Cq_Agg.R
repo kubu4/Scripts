@@ -12,11 +12,11 @@
 ## (array that does not have constant length in a dimension) but I don't know how that would output.
 
 CQagg <- function(dataframe, label.column = 6 , cq.column = 9, filename = FALSE)   {
-  
+  require(plyr)
   temp.dataframe <- subset(dataframe, select = c("qPCR_filename", "qPCR_Date", "Well", "Fluor", "Target", "Content", "Sample", "Biological.Set.Name", "Cq.Mean", "Cq.Std..Dev", "Starting.Quantity..SQ.", 
                                                  "Log.Starting.Quantity", "SQ.Mean", "SQ.Std..Dev", "Set.Point", "Well.Note", "Cq")) # Rearranges supplied dataframe to put CQ values in last column
   
-  temp.dataframe <- temp.dataframe[order(temp.dataframe$Content),]
+  temp.dataframe <- temp.dataframe[order(temp.dataframe$qPCR_filename, temp.dataframe$Target, temp.dataframe$Content, temp.dataframe$Sample),]
   output.df2 <- temp.dataframe[1,] ## Initilizes the return data frame with the first row of qPCR information
   rowcounter <- 2 # Index for keeping track of the row of the new data frame currently being operated on (Sample label)
   columncounter <- length(temp.dataframe) + 1 ## Index for keeping track of column of new data frame being operated on (individual cq values)
@@ -29,17 +29,17 @@ CQagg <- function(dataframe, label.column = 6 , cq.column = 9, filename = FALSE)
     
     ## Main logical test, checking if the current sample label is the same as the previous sample label. If so, appends
     ## current Cq value to the end of the return data frame and increments columncounter by 1
-    if(temp.dataframe$Content[i] == temp.dataframe$Content[(i - 1)])   {
-      output.df2[(rowcounter - 1),columncounter] <- temp.dataframe[i,length(temp.dataframe)]
-      columncounter <- columncounter + 1
-      
-      ## Fork for failed if tests, creates a new row in the return data frame with the new sample label, increments rowcounter
-      ## by 1 and resets columncounter to it's intial value. 
-    } else {
-      output.df2[rowcounter,] <- temp.dataframe[i,]
-      rowcounter <- rowcounter + 1
-      columncounter <- length(temp.dataframe) + 1
-    }
+      if(temp.dataframe$Content[i] == temp.dataframe$Content[(i - 1)])   {
+        output.df2[(rowcounter - 1),columncounter] <- temp.dataframe$Cq[i]
+        columncounter <- columncounter + 1
+        
+        ## Fork for failed if tests, creates a new row in the return data frame with the new sample label, increments rowcounter
+        ## by 1 and resets columncounter to it's intial value. 
+      } else {
+        output.df2 <- rbind.fill(output.df2, temp.dataframe[i,])
+        rowcounter <- rowcounter + 1
+        columncounter <- length(temp.dataframe) + 1
+      }
   }
   colnames(output.df2)[length(dataframe):length(output.df2)] <- paste('CQ', 1:(length(output.df2) - length(dataframe) + 1), sep = "")
   # The above line renames newly created columns in the format CQ* where * is the replicate number ex. CQ1, CQ2, etc.
