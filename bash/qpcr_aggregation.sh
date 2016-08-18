@@ -98,7 +98,7 @@ done
 sed -i.old "1s/^.*$/$new_head/" "$master_list_temp"
 sed -i.old $'s/\r//' "$master_list_temp"
 rm *.old
-rm *.tmp
+#rm *.tmp
 
 #Reorder columns to move "Cq" to last column
 
