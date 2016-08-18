@@ -102,4 +102,4 @@ rm *.old
 
 #Reorder columns to move "Cq" to last column
 
-paste -d, <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9 "$master_list_temp") >> "$master_list"
+paste -d, <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9 "$master_list_temp") > "$master_list"
