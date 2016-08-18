@@ -98,8 +98,10 @@ done
 sed -i.old "1s/^.*$/$new_head/" "$master_list_temp"
 sed -i.old $'s/\r//' "$master_list_temp"
 rm *.old
-#rm *.tmp
 
 #Reorder columns to move "Cq" to last column
 
 paste -d, <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9 "$master_list_temp") > "$master_list"
+
+# Remove temporary files
+rm *.tmp
