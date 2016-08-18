@@ -102,4 +102,4 @@ rm *.tmp
 
 #Reorder columns to move "Cq" to last column
 
-paste <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9"$master_list_temp")
+paste <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9"$master_list_temp") > "$master_list"
