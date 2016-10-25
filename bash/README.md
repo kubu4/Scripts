@@ -9,7 +9,7 @@ A script to create a Jekyll blog post header in the following format, where phra
 ```
 ---
 layout: post
-title: _phrase_
+title: phrase
 date: 'YYYY-MM-DD'
 ---
 ```
