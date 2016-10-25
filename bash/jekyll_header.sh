@@ -5,6 +5,10 @@
 # for a phrase and that phrase is utilized in the name of
 # the markdown file that is created.
 
+# To run, copy this file to your desired directory.
+# Change to the directory where you just copied this file.
+# In a terminal prompt, type:. jekyll_header.sh
+
 # Set variables
 POST_DATE=$(date '+%Y-%m-%d')
 MD_LINE="---"
@@ -12,12 +16,12 @@ LAYOUT="layout: post"
 TITLE="title: "
 DATE_LINE="date: "
 
-#Ask user for input
+# Ask user for input
 echo "Enter phrase:"
 read PHRASE
 echo "You entered $PHRASE"
 
-#Remove spaces from PHRASE and replace with hyphens
+# Remove spaces from PHRASE and replace with hyphens
 FORMATTED_PHRASE="$(echo -ne "${PHRASE}" | tr [:space:] '-')"
 
 # Save new filename using POST_DATE and FORMATTED_PHRASE variables.
@@ -30,7 +34,7 @@ printf "%s\n%s\n%s_%s_\n%s'%s\'\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "
 $NEW_MD_FILE
 
 
-#Use git to stage, commit, and push NEW_MD_FILE to GitHub
+# Use git to stage, commit, and push NEW_MD_FILE to GitHub
 git add "$NEW_MD_FILE"
 git commit -m "created new post: $NEW_MD_FILE"
 git push
