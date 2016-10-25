@@ -12,4 +12,5 @@ echo "Enter phrase:"
 read PHRASE
 echo "You entered $PHRASE"
 
+# Prints formatted Jekyll header utilizing POST_DATE and user-entered PHRASE.
 printf "%s\nlayout: post\ntitle: _%s_\ndate: '%s\'\n%s" "---" "$PHRASE" "$POST_DATE"
