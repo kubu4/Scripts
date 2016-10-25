@@ -5,7 +5,7 @@ Requires a separate credentials file located in the user's home directory.
 
 ---
 #### jekyll_header.sh
-A script to create a Jekyll blog post header in the following format:
+A script to create a Jekyll blog post header in the following format, where phrase and date are customized:
 ```
 ---
 layout: post
