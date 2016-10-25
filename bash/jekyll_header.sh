@@ -11,3 +11,5 @@ POST_DATE=$(date '+%Y-%m-%d')
 echo "Enter phrase:"
 read PHRASE
 echo "You entered $PHRASE"
+
+printf "%s\nlayout: post\ntitle: _%s_\ndate: '%s\'\n%s" "---" "$PHRASE" "$POST_DATE"
