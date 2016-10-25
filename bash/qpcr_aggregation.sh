@@ -9,6 +9,7 @@
 
 
 # Set final output filename
+master_list_temp="qPCR_master_list_messy.tmp"
 master_list="qPCR_master_list_messy.csv"
 
 # Replace spaces in filenames with underscores.
@@ -80,7 +81,7 @@ for file in *Quantification*.csv; do
 		### Pass bash variables ($qpcr_filename, $qpcr_date) to awk, and append the values to the beginning of all records.
 		### Sort comma-separated output(-t ,) on fields 5, 6, then 7 (Target, Content, then Sample).
 		### Use parameter substitution to output to filename with .tmp extension and concatenate output to master .csv file.
-		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | sort -t "," -k5,5 -k6,6 -k7,7 | tee "${file1/.headless/.tmp}" >> "$master_list"
+		awk -v var1="$qpcr_filename" -v var2="$qpcr_date" '{ print var1","var2$0 }' "$file1" | sort -t "," -k5,5 -k6,6 -k7,7 | tee "${file1/.headless/.tmp}" >> "$master_list_temp"
 		echo "Head out date: $qpcr_date"
 		rm "$file1"
 	done	
@@ -89,12 +90,18 @@ done
 
 	
 # Add header
-## Takes $master_list (.csv file) as input.
-## Use sed to edit $master_list "in place" and create a backup file with .old extension (-i.old).
-## Sed inserts $new_head above the first line of $master_list.
+## Takes $master_list_temp (.csv file) as input.
+## Use sed to edit $master_list_temp "in place" and create a backup file with .old extension (-i.old).
+## Sed inserts $new_head above the first line of $master_list_temp.
 ## Sed then removes any hidden Windows newline characters (^M; represented by \r)
 ## and then deletes the backup file.
-sed -i.old "1s/^.*$/$new_head/" "$master_list"
-sed -i.old $'s/\r//' "$master_list"
+sed -i.old "1s/^.*$/$new_head/" "$master_list_temp"
+sed -i.old $'s/\r//' "$master_list_temp"
 rm *.old
+
+#Reorder columns to move "Cq" to last column
+
+paste -d, <(cut -d, -f1-8 "$master_list_temp") <(cut -d, -f10-17 "$master_list_temp") <(cut -d, -f9 "$master_list_temp") > "$master_list"
+
+# Remove temporary files
 rm *.tmp

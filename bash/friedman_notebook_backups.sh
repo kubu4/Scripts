@@ -6,6 +6,11 @@
 #Change to working directory.
 cd /home/samb/notebook_backup/sam
 
+##If changing directory fails (exit status [$?] does NOT equal 0), exit script.
+if [ $? -ne 0 ]
+then echo "Couldn't change to desired directory. Make sure target directory exists before executing script."
+fi
+
 #Download website with all necessary files for offline viewing.
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
 #.gtf, etc.). Specify allowable domains to download linked content
@@ -15,7 +20,7 @@ wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-lin
 --reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
 --no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
 --domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
-googleusercontent.com,www.dropbox.com,dl.dropbox.com \
+googleusercontent.com,www.dropbox.com/s,dl.dropbox.com/s \
 http://onsnetwork.org/sjwfriedmanlab/
 
 
