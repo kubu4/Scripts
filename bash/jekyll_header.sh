@@ -28,7 +28,8 @@ touch "$NEW_MD_FILE"
 
 
 # Prints formatted Jekyll header utilizing POST_DATE and user-entered PHRASE.
-printf "%s\n%s\n%s_%s_\n%s'%s\'\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$MD_LINE"
+printf "%s\n%s\n%s_%s_\n%s'%s\'\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$MD_LINE" >> \
+$NEW_MD_FILE
 
 cat $NEW_MD_FILE
 
