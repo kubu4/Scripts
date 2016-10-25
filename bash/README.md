@@ -4,6 +4,19 @@ A script to backup my [Friedman Lab (onsnetwork.org)](http://onsnetwork.org/sjwf
 Requires a separate credentials file located in the user's home directory.
 
 ---
+#### jekyll_header.sh
+A script to create a Jekyll blog post header in the following format:
+```
+---
+layout: post
+title: _phrase_
+date: 'YYYY-MM-DD'
+---
+```
+
+Additionally, the script will automatically stage, commit, and push to a GitHub repo.
+
+---
 #### ngs_automator.sh
 A script to identify directories storing Roberts Lab high-throughput sequencing files that lack readme files. Additionally, for those directories lacking readme files, the script will generate a readme file, append the file path to the readme file, append filenames and readcounts for any sequencing files in that directory.
 
