@@ -7,11 +7,11 @@
 
 # Set variables
 POST_DATE=$(date '+%Y-%m-%d')
-NEW_MD_FILE=$POST_DATE-"$FORMATTED_PHRASE".md
+NEW_MD_FILE="$(echo -n "${POST_DATE}"-"${FORMATTED_PHRASE}")".md
 MD_LINE="---"
 LAYOUT="layout: post"
 TITLE="title: "
-DATE_LINE-"date: "
+DATE_LINE="date: "
 
 #Ask user for input
 echo "Enter phrase:"
@@ -30,5 +30,5 @@ touch "$NEW_MD_FILE"
 # Prints formatted Jekyll header utilizing POST_DATE and user-entered PHRASE.
 printf "%s\n%s\n%s_%s_\n%s'%s\'\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$MD_LINE"
 
-#cat $NEW_MD_FILE
+cat $NEW_MD_FILE
 
