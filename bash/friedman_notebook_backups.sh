@@ -20,7 +20,7 @@ wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-lin
 --reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
 --no-parent -e robots=off --wait=1 --random-wait --limit-rate=100m \
 --domains=onsnetwork.org,eagle.fish.washington.edu,docs.google.com,\
-googleusercontent.com,www.dropbox.com/,dl.dropbox.com/ \
+googleusercontent.com,www.dropbox.com,dl.dropbox.com \
 http://onsnetwork.org/sjwfriedmanlab/
 
 
