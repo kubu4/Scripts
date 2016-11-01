@@ -63,7 +63,7 @@ mount -t cifs -o username="$user",password="$pass" \
 
 #Copy downloaded notebook to Sam's notebook backups folder on lab server.
 #Redirects stderror to an error file for troubleshooting
-cp -rf /home/samb/notebook_backup/sam /mnt/backupordie/Notebook_backups/sam/onsnetwork 2> /home/samb/notebook_backup/error.file
+cp -rf /home/samb/notebook_backup/sam/. /mnt/backupordie/Notebook_backups/sam/onsnetwork 2> /home/samb/notebook_backup/error.file
 
 #If copy fails (exit status [$?] does NOT equal 0), exit script.
 if [ $? -ne 0 ]
