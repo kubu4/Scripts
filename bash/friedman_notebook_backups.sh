@@ -34,7 +34,7 @@ PKG_OK=$(dpkg-query -W --showformat='${Status}\n' cifs-utils | grep "install ok 
 echo Checking for cifs-utils: $PKG_OK
 if [ "" == "$PKG_OK" ]; then
   echo "No cifs-utils. Setting up cifs-utils."
-  sudo apt-get --force-yes --yes install cifs-utils
+  apt-get --force-yes --yes install cifs-utils
 fi
 
 #Set variable with today's date and append notebook owner name.
