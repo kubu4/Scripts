@@ -28,12 +28,13 @@ http://onsnetwork.org/sjwfriedmanlab/
 #Ubuntu.
 
 #Check for installation of cifs-utils. Looks to see if cifs-utils is installed.
-#If it is not (exit status [$?] equals 1), then acquire the package. This is only
+#If it is not, then acquire the package. This is only
 #necessary the first time this script is run on a new system.
-dpkg -s cifs-utils
-
-if [ $? -eq 1 ]
-then apt-get install cifs-utils
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' cifs-utils | grep "install ok installed")
+echo Checking for cifs-utils: $PKG_OK
+if [ "" == "$PKG_OK" ]; then
+  echo "No cifs-utils. Setting up cifs-utils."
+  sudo apt-get --force-yes --yes install cifs-utils
 fi
 
 #Set variable with today's date and append notebook owner name.
