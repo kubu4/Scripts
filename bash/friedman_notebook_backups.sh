@@ -4,9 +4,11 @@
 #for offline viewing and copy notebook to lab server.
 
 #Change to working directory.
+
 cd /home/samb/notebook_backup/sam
 
 ##If changing directory fails (exit status [$?] does NOT equal 0), exit script.
+
 if [ $? -ne 0 ]
 then echo "Couldn't change to desired directory. Make sure target directory exists before executing script."
 fi
@@ -15,6 +17,7 @@ fi
 #Reject possibly large files (.zip, .gz, .fastq, .fa, .fasta, .bam, .sam, .gff
 #.gtf, etc.). Specify allowable domains to download linked content
 #(e.g. dropbox.com, google docs, etc.).
+
 wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-links \
 --page-requisites \
 --reject *.[BbSs][Aa][Mm],*.[Ff][Aa]*,*.zip,*.gz,*.[Tt][Aa][Bb]*,*.txt,*.[Gg]*[Ff],*.goa* \
@@ -23,6 +26,8 @@ wget --user-agent mozilla --adjust-extension --mirror --span-hosts --convert-lin
 googleusercontent.com,dl.dropbox.com \
 http://onsnetwork.org/sjwfriedmanlab/
 
+#Remove string appended to end of Dropbox files
+find /home/samb/notebook_backup/sam -type f -name '*?dl=0' | while read f; do mv "$f" "${f//\?dl=0}"; done
 
 #Mounting the lab server requires the Linux "cifs-utils" package, which is not installed by default on 
 #Ubuntu.
@@ -30,6 +35,7 @@ http://onsnetwork.org/sjwfriedmanlab/
 #Check for installation of cifs-utils. Looks to see if cifs-utils is installed.
 #If it is not, then acquire the package. This is only
 #necessary the first time this script is run on a new system.
+
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' cifs-utils | grep "install ok installed")
 echo Checking for cifs-utils: $PKG_OK
 if [ "" == "$PKG_OK" ]; then
@@ -37,22 +43,26 @@ if [ "" == "$PKG_OK" ]; then
   apt-get --force-yes --yes install cifs-utils
 fi
 
+
 #Set variable with today's date and append notebook owner name.
 #Uncomment (i.e. remove #) next line if appending date/name to backup is desired.
 #SAM_NOTEBOOK=$(date '+%Y%m%d')_sam
 
 #Source (i.e. load into memory) credentials file for mounting server
 #Credentials file contains username/password for lab server.
+
 . /home/samb/.b_or_d_mount_creds
 
 #Verify server is mounted.
 #Look for Notebook_backups directory on server.
+
 find /mnt -maxdepth 1 -type d -name 'backupordie'
 
 #If the directory is not found (i.e. exit status [$?] equals 1), then create
 #the directory and 
 #mount "lab" share of the backupordie server.
 #Utilizes username/password variables that were sourced from credentials file.
+
 if [ $? -eq 1 ]
 then mkdir /mnt/backupordie
 fi
