@@ -18,6 +18,8 @@ Additionally, the script will automatically stage, commit, and push to a GitHub 
 
 ---
 #### ngs_automator.sh
+WORK IN PROGRESS! TESTING NOT COMPLETE! DOCUMENTATION NOT CLEAR!
+
 A script to identify directories storing Roberts Lab high-throughput sequencing files that lack readme files. Additionally, for those directories lacking readme files, the script will generate a readme file, append the file path to the readme file, append filenames and readcounts for any sequencing files in that directory.
 
 ---
