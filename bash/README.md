@@ -2,7 +2,7 @@
 WORK IN PROGRESS! INCOMPLETE!
 A script to check my home IP address and notify me if it has changed.
 
-
+---
 #### friedman_notebook_backups.sh
 A script to backup my [Friedman Lab (onsnetwork.org)](http://onsnetwork.org/sjwfriedmanlab/) online notebook.
 
