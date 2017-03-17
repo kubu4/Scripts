@@ -13,4 +13,6 @@ grep --only-matching --extended-regexp "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" > curre
 
 # Compare the two files.
 
+diff ip.txt current_ip.txt
+
 # If two files are different, mail IP address to me.
