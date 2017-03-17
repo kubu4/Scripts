@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-CURRENT_IP=$(wget -q -O - checkip.dyndns.com | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+current_ip=$(wget -q -O - checkip.dyndns.com | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 
 OUTLINE
 
