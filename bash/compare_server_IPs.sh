@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
+
+
 current_ip=$(wget --quiet --output-document=- checkip.dyndns.com | grep --only-matching --extended-regexp "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
 
 OUTLINE
 
-# Determine if file containing IP address exists
 
-# If not, create the file and add the current IP address to the file.
+# Create the file.
+
+touch current_ip.txt
 
 # Else, grab current IP address and store to a diffferent file
 
