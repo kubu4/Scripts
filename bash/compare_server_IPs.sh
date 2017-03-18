@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-OUTLINE
+#OUTLINE
 
 
 # Create the file.
