@@ -20,10 +20,7 @@ diff ip.txt current_ip.txt
 case $? in
     1)
         cat current_ip.txt > ip.txt
-	echo "this is working"
-	cat ip.txt
-	cat current_ip.txt
-	;;
-    0)
+	new_ip="$(cat current_ip.txt)"
+	echo "$new_ip" | mail -s "Your home IP address has changed" you@youremail.com
 esac
 
