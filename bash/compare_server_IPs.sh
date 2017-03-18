@@ -21,4 +21,9 @@ case $? in
     1)
         cat current_ip.txt > ip.txt
 	echo "this is working"
+	cat ip.txt
+	cat current_ip.txt
+	;;
+    0)
 esac
+
