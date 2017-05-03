@@ -43,8 +43,9 @@ while (my $line = <$in>) {
     # Append to current line if Content (column 6) and Sample (column 7) 
     # on one line equals Content and Sample on the next line,
     # otherwise set our looping variables to new ones
+    my $add_column = $#data;
     if ($curr_content eq $data[5] && $curr_sample eq $data[6]) {
-        $curr_line = $curr_line . "," . $data[17];
+        $curr_line = $curr_line . "," . $data[$add_column];
     } else {
         # Print what we've saved so far before we reset
         print $curr_line . "\n";
