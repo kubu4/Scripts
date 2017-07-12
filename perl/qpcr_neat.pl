@@ -40,11 +40,14 @@ while (my $line = <$in>) {
     # Spliting the columns at each comma
     my @data = split(/,/, $line);
 
+    #Save value last index in array to variable
+    my $add_column = $#data;
+    
     # Append to current line if Content (column 6) and Sample (column 7) 
     # on one line equals Content and Sample on the next line,
     # otherwise set our looping variables to new ones
     if ($curr_content eq $data[5] && $curr_sample eq $data[6]) {
-        $curr_line = $curr_line . "," . $data[17];
+        $curr_line = $curr_line . "," . $data[$add_column];
     } else {
         # Print what we've saved so far before we reset
         print $curr_line . "\n";
