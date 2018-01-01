@@ -18,6 +18,7 @@ open(my $in, "<", $input);
 my $curr_content = "";
 my $curr_sample = "";
 my $curr_line = "";
+my $add_column = "";
 my @data = ();
 
 # Set up the first line, need to initialize these to start 
