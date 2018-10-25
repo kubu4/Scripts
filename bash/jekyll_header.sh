@@ -22,15 +22,15 @@ categories="categories: "
 # Ask user for input
 echo "Enter post title (use no punctuation):"
 read post_title
-echo "You entered ${post_title}"
+echo "You entered ${post_title[@]}"
 
 echo "Enter tags (space separated)"
-read tag_list
-echo "You entered ${tag_list}"
+read -a tag_array
+echo "You entered ${tag_list[@]}"
 
 echo "Enter categories (space separated)"
-read categories_list
-echo "You entered ${categories_list}"
+read -a categories_array
+echo "You entered ${categories_array[@]}"
 
 # remove spaces from post-title and replace with hyphens
 formatted_title=$(echo -ne "${post_title}" | tr [:space:] '-')
@@ -41,6 +41,8 @@ new_md_file="$(echo -n "${post_date}"-"${formatted_title}")".md
 
 # prints formatted jekyll header utilizing post_date and user-entered phrase.
 # writes contents to new_md_file
-printf "%s\n" \
-"${md_line}" "${layout}" "${title}${post_title}" "${date_line}'${post_date}'" "${tags}${tag_list}" "${categories}${categories_list}" "${md_line}" >> \
-"${new_md_file}"
+printf "%s\n" "${md_line}" "${layout}" "${title}${post_title}" "${date_line}'${post_date}'" "${tags}" >> "${new_md_file}"
+printf "  - %s\n" "${tag_array[@]}" >> "${new_md_file}"
+printf "%s\n" "${categories}" >> "${new_md_file}"
+printf "  - %s\n" "${categories_array[@]}" >> "${new_md_file}"
+printf "%s\n" "${md_line}" >> "${new_md_file}"
