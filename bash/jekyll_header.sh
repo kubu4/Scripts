@@ -10,34 +10,37 @@
 # In a terminal prompt, type:. jekyll_header.sh
 
 # Set variables
-POST_DATE=$(date '+%Y-%m-%d')
-MD_LINE="---"
-LAYOUT="layout: post"
-TITLE="title: "
-DATE_LINE="date: "
+post_date=$(date '+%Y-%m-%d')
+md_line="---"
+layout="layout: post"
+title="title: "
+date_line="date: "
+comments="comments: true"
+tags="tags: "
+categories="categories: "
 
 # Ask user for input
-echo "Enter phrase:"
-read PHRASE
-echo "You entered $PHRASE"
+echo "Enter post title (use no punctuation):"
+read post_title
+echo "You entered ${post_title}"
 
-# Remove spaces from PHRASE and replace with hyphens
-FORMATTED_PHRASE="$(echo -ne "${PHRASE}" | tr [:space:] '-')"
+echo "Enter tags (space separated)"
+read tag_list
+echo "You entered ${tag_list}"
 
-# Save new filename using POST_DATE and FORMATTED_PHRASE variables.
-NEW_MD_FILE="$(echo -n "${POST_DATE}"-"${FORMATTED_PHRASE}")".md
+echo "Enter categories (space separated)"
+read categories_list
+echo "You entered ${categories_list}"
+
+# remove spaces from post-title and replace with hyphens
+formatted_title=$(echo -ne "${post_title}" | tr [:space:] '-')
+
+# save new filename using post_date and formatted_phrase variables.
+new_md_file="$(echo -n "${post_date}"-"${formatted_title}")".md
 
 
-# Prints formatted Jekyll header utilizing POST_DATE and user-entered PHRASE.
-# Writes contents to NEW_MD_FILE
-printf "%s\n%s\n%s%s\n%s'%s'\n%s\n" "$MD_LINE" "$LAYOUT" "$TITLE" "$PHRASE" "$DATE_LINE" "$POST_DATE" "$MD_LINE" >> \
-"$NEW_MD_FILE"
-
-# Opens NEW_MD_FILE in nano text editor for editing.
-nano "$NEW_MD_FILE"
-
-
-# Use git to stage, commit, and push NEW_MD_FILE to GitHub
-git add "$NEW_MD_FILE"
-git commit -m "created new post: $NEW_MD_FILE"
-git push
+# prints formatted jekyll header utilizing post_date and user-entered phrase.
+# writes contents to new_md_file
+printf "%s\n" \
+"${md_line}" "${layout}" "${title}${post_title}" "${date_line}'${post_date}'" "${tags}${tag_list}" "${categories}${categories_list}" "${md_line}" >> \
+"${new_md_file}"
