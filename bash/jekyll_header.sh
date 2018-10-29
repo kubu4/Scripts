@@ -2,8 +2,27 @@
 
 # This script is designed to create a markdown file that
 # generates a formatted Jekyll header. It prompts the user
-# for a phrase and that phrase is utilized in the name of
+# for a post title and that title is utilized in the name of
 # the markdown file that is created.
+
+# It also prompts the user for tags/categories and launches the Atom text editing software after this information is provided.
+
+# Tag/category formatting is specifically for the Basically Basic theme, which requires a Jekyll array format.
+# Space-separated formatting for tags/categories are available in this git commit:
+# https://github.com/kubu4/Scripts/blob/3712cdf474a8008dd4d314418f19f5579e360466/bash/jekyll_header.sh
+
+# Expected output will be something like:
+#
+# ---
+# layout: post
+# title: First post test
+# date: '2018-10-29'
+# tags:
+#   - temporary
+# categories:
+#   - delete
+# ---
+
 
 # To run, copy this file to your desired directory.
 # Change to the directory where you just copied this file.
@@ -44,3 +63,6 @@ printf "  - %s\n" "${tag_array[@]}" >> "${new_md_file}"
 printf "%s\n" "${categories}" >> "${new_md_file}"
 printf "  - %s\n" "${categories_array[@]}" >> "${new_md_file}"
 printf "%s\n" "${md_line}" >> "${new_md_file}"
+
+# Open file with Atom text editor.
+atom "new_md_file"
