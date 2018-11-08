@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Bash script to fix URLs from old Wordpress site that was converted to markdown via Exitwp program.
+# Finds all old URLs matching grep pattern and replaces them with Jekyll format (e.g. YYYY/mm/dd/title.html)
+
 # Take input file and assing to variable
 fileName=$1
 
