@@ -65,4 +65,4 @@ printf "  - %s\n" "${categories_array[@]}" >> "${new_md_file}"
 printf "%s\n" "${md_line}" >> "${new_md_file}"
 
 # Open file with Atom text editor.
-atom "new_md_file"
+atom "${new_md_file}"
