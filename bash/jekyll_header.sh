@@ -38,14 +38,17 @@ comments="comments: true"
 tags="tags: "
 categories="categories: "
 
+OLD_IFS="${IFS}"
+IFS=';'
+
 # Ask user for input
 echo "Enter post title (use no punctuation):"
 read post_title
 
-echo "Enter tags (space separated)"
+echo "Enter tags (semi-colon separated)"
 read -a tag_array
 
-echo "Enter categories (space separated)"
+echo "Enter categories (semi-colon separated)"
 read -a categories_array
 
 # remove spaces from post-title and replace with hyphens
