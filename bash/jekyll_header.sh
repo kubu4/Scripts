@@ -54,6 +54,8 @@ formatted_title=$(echo -ne "${post_title}" | tr [:space:] '-')
 # save new filename using post_date and formatted_phrase variables.
 new_md_file="$(echo -n "${post_date}"-"${formatted_title}")".md
 
+# Creates markdown file.
+touch "${new_md_file}"
 
 # prints formatted jekyll header utilizing post_date and user-entered post title and tags/categories.
 # Tags and categories are formatted as Jekyll array - needed for Basically Basic theme.
