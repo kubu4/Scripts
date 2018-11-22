@@ -29,7 +29,7 @@
 # In a terminal prompt, type:. jekyll_header.sh
 
 # Set variables
-post_date=$(date '+%Y-%m-%d')
+post_date=$(date '+%F %H:%M')
 md_line="---"
 layout="layout: post"
 title="title: "
