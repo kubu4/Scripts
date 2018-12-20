@@ -38,7 +38,22 @@ printf "%0.s-" {1..10} >> system_path.log
 echo ${PATH} | tr : \\n >> system_path.log
 
 ## Establish variables for more readable code
-maker_dir=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/
-busco=/gscratch/srlab/programs/busco-v3/scripts/run_BUSCO.py
 bedtools=/gscratch/srlab/programs/bedtools-2.27.1/bin/bedtools
+busco=/gscratch/srlab/programs/busco-v3/scripts/run_BUSCO.py
+busco_db=/gscratch/srlab/sam/data/databases/BUSCO/eukaryota_odb9
+maker_dir=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation
 oly_genome=/gscratch/srlab/sam/data/O_lurida/oly_genome_assemblies/Olurida_v081/Olurida_v081.fa
+
+
+# Subset transcripts and include +/- 1000bp on each side.
+## Reduces amount of data used for training - don't need crazy amounts to properly train gene models
+awk -v OFS="\t" '{ if ($3 == "mRNA") print $1, $4, $5 }' ${maker_dir}/Olurida_v081.maker.all.noseqs.gff | \
+awk -v OFS="\t" '{ if ($2 < 1000) print $1, "0", $3+1000; else print $1, $2-1000, $3+1000 }' | \
+bedtools getfasta -fi ${oly_genome} \
+-bed - \
+-fo Olurida_v081.all.maker.transcripts1000.fasta
+
+cp Olurida_v081.all.maker.transcripts1000.fasta ${maker_dir}
+
+
+# Run BUSCO/Augustus training
