@@ -49,7 +49,7 @@ oly_genome=/gscratch/srlab/sam/data/O_lurida/oly_genome_assemblies/Olurida_v081/
 ## Reduces amount of data used for training - don't need crazy amounts to properly train gene models
 awk -v OFS="\t" '{ if ($3 == "mRNA") print $1, $4, $5 }' ${maker_dir}/Olurida_v081.maker.all.noseqs.gff | \
 awk -v OFS="\t" '{ if ($2 < 1000) print $1, "0", $3+1000; else print $1, $2-1000, $3+1000 }' | \
-bedtools getfasta -fi ${oly_genome} \
+${bedtools} getfasta -fi ${oly_genome} \
 -bed - \
 -fo Olurida_v081.all.maker.transcripts1000.fasta
 
@@ -57,3 +57,13 @@ cp Olurida_v081.all.maker.transcripts1000.fasta ${maker_dir}
 
 
 # Run BUSCO/Augustus training
+${busco} \
+--in Olurida_v081.all.maker.transcripts1000.fasta \
+--out  Olurida_maker_busco \
+--lineage_path ${busco_db} \
+--mode genome \
+--cpu 56 \
+--long \
+--species human \
+--tarzip \
+--augustus_parameters='--progress=true'
