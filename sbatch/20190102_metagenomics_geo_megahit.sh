@@ -8,7 +8,7 @@
 ## Nodes
 #SBATCH --nodes=2
 ## Walltime (days-hours:minutes:seconds format)
-#SBATCH --time=15-00:00:00
+#SBATCH --time=5-00:00:00
 ## Memory per node
 #SBATCH --mem=120G
 ##turn on e-mail notification
@@ -76,7 +76,7 @@ ${megahit} \
 ## Align reads with BBmap BBwrap
 ${bbmap_dir}/bbwrap.sh \
 ref=megahit_out/final.contigs.fa \
-in=${R1_fastq_list} \
+in1=${R1_fastq_list} \
 in2=${R2_fastq_list} \
 out=aln.sam.gz
 
