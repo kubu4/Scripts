@@ -62,8 +62,8 @@ for fastq in ${fastq_dir}/*R2*.gz; do
 done
 
 # Create comma-separated list of input files
-R1_fastq_list=(IFS=,; echo "${fastq_array_R1[*]}")
-R2_fastq_list=(IFS=,; echo "${fastq_array_R2[*]}")
+R1_fastq_list=$(IFS=,; echo "${fastq_array_R1[*]}")
+R2_fastq_list=$(IFS=,; echo "${fastq_array_R2[*]}")
 
 
 # Run Megahit using paired-end reads
