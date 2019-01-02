@@ -41,6 +41,7 @@ echo ${PATH} | tr : \\n >> system_path.log
 # variables
 fastq_dir=/gscratch/srlab/sam/data/metagenomics/P_generosa
 megahit=/gscratch/srlab/programs/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin/megahit
+bbmap_dir=/gscratch/srlab/programs/bbmap_38.34
 
 ## Inititalize arrays
 fastq_array_R1=()
@@ -63,3 +64,23 @@ done
 # Create comma-separated list of input files
 R1_fastq_list=(IFS=,; echo "${fastq_array_R1[*]}")
 R2_fastq_list=(IFS=,; echo "${fastq_array_R2[*]}")
+
+
+# Run Megahit using paired-end reads
+${megahit} \
+-1 ${R1_fastq_list} \
+-2 ${R2_fastq_list} \
+--num-cpu-threads 56
+
+# Determine coverage
+## Align reads with BBmap BBwrap
+${bbmap_dir}/bbwrap.sh \
+ref=megahit_out/final.contigs.fa \
+in=${R1_fastq_list} \
+in2=${R2_fastq_list} \
+out=aln.sam.gz
+
+## Output contig coverage
+${bbmap_dir}/pileup.sh \
+in=aln.sam.gz \
+out=coverage.txt
