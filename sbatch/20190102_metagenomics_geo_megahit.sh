@@ -38,9 +38,28 @@ printf "%0.s-" {1..10} >> system_path.log
 echo ${PATH} | tr : \\n >> system_path.log
 
 
+# variables
+fastq_dir=/gscratch/srlab/sam/data/metagenomics/P_generosa
+megahit=/gscratch/srlab/programs/megahit_v1.1.4_LINUX_CPUONLY_x86_64-bin/megahit
 
+## Inititalize arrays
+fastq_array_R1=()
+fastq_array_R2=()
 
+# Create array of fastq R1 files
+## Use parameter expansion to remove file path from filenames
+for fastq in ${fastq_dir}/*R1*.gz do
+  fastq="${fastq##*/}"
+  fastq_array_R1+=(${fastq})
+done
 
+# Create array of fastq R2 files
+## Use parameter expansion to remove file path from filenames
+for fastq in ${fastq_dir}/*R2*.gz do
+  fastq="${fastq##*/}"
+  fastq_array_R2+=(${fastq})
+done
 
 # Create comma-separated list of input files
-in_fastq_list=(IFS=,; echo "${fastq_array[*]}")
+R1_fastq_list=(IFS=,; echo "${fastq_array_R1[*]}")
+R2_fastq_list=(IFS=,; echo "${fastq_array_R2[*]}")
