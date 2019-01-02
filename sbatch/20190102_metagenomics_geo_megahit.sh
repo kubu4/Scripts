@@ -49,14 +49,14 @@ fastq_array_R2=()
 
 # Create array of fastq R1 files
 ## Use parameter expansion to remove file path from filenames
-for fastq in ${fastq_dir}/*R1*.gz do
-  fastq="${fastq##*/}"
+for fastq in ${fastq_dir}/*R1*.gz; do
+  fastq_="${fastq##*/}"
   fastq_array_R1+=(${fastq})
 done
 
 # Create array of fastq R2 files
 ## Use parameter expansion to remove file path from filenames
-for fastq in ${fastq_dir}/*R2*.gz do
+for fastq in ${fastq_dir}/*R2*.gz; do
   fastq="${fastq##*/}"
   fastq_array_R2+=(${fastq})
 done
