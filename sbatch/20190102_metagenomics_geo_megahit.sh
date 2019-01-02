@@ -70,7 +70,7 @@ R2_fastq_list=$(IFS=,; echo "${fastq_array_R2[*]}")
 ${megahit} \
 -1 ${R1_fastq_list} \
 -2 ${R2_fastq_list} \
---num-cpu-threads 56
+--num-cpu-threads 28
 
 # Determine coverage
 ## Align reads with BBmap BBwrap
