@@ -38,3 +38,27 @@ printf "%0.s-" {1..10} >> system_path.log
 echo ${PATH} | tr : \\n >> system_path.log
 
 # Variables
+gmhmmp=/gscratch/srlab/programs/MetaGeneMark_linux_64_3.38/mgm/gmhmmp
+mgm_mod=/gscratch/srlab/programs/MetaGeneMark_linux_64_3.38/mgm/MetaGeneMark_v1.mod
+assembly_fasta=/gscratch/scrubbed/samwhite/outputs/20190102_metagenomics_geo_megahit/megahit_out/final.contigs.fa
+nuc_out=20190103-mgm-nucleotides.fa
+gff_out=20190103-mgm.gff3
+prot_out=20190103-mgm-proteins.fa
+
+# Run MetaGeneMark
+## Specifying the following:
+### -a : output predicted proteins
+### -A : write predicted proteins to designated file
+### -d : output predicted nucleotides
+### -D : write predicted protein to designated file
+### -f 3 : Output format in GFF3
+### -m : Model file (supplied with software)
+### -o : write GFF3 to designated file
+${gmhmmp} \
+-a \
+-A ${prot_out} \
+-d \
+-D ${nuc_out} \
+-f 3 \
+-m ${mgm_mod} \
+-o ${gff_out}
