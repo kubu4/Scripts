@@ -43,7 +43,7 @@ maker_dir=/gscratch/srlab/programs/maker-2.31.10/bin
 maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.proteins.fasta
 maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.transcripts.fasta
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
-maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20181220_outfmt6.blastp
+maker_blastp=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_blastp/20190107_blastp.outfmt6
 maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/Olurida_v081.all.maker.proteins.fasta.tsv
 sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 

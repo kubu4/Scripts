@@ -52,9 +52,16 @@ fathom=/gscratch/srlab/programs/maker-2.31.10/exe/snap/fathom
 forge=/gscratch/srlab/programs/maker-2.31.10/exe/snap/forge
 hmmassembler=/gscratch/srlab/programs/maker-2.31.10/exe/snap/hmm-assembler.pl
 fasta_merge=/gscratch/srlab/programs/maker-2.31.10/bin/fasta_merge
+map_ids=/gscratch/srlab/programs/maker-2.31.10/bin/maker_map_ids
+map_gff_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_gff_ids
+map_fasta_ids/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
+
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
+
+## Path to InterProScan5
+interproscan=/gscratch/srlab/programs/interproscan-5.31-70.0/interproscan.sh
 
 ## Store path to options control file
 maker_opts_file=./maker_opts.ctl
@@ -73,13 +80,15 @@ virginica_proteome=/gscratch/srlab/sam/data/C_virginica/virginica_ncbi_protein/G
 
 ### Path to Panopea generosa TransDecoder protein FastA
 panopea_td_proteome=/gscratch/srlab/sam/data/P_generosa/generosa_proteomes/20180827_trinity_geoduck.fasta.transdecoder.pep
+
 ### Path to concatenated NCBI prteins FastA
 combined_proteomes=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/gigas_virginica_ncbi_proteomes.fasta
 
 ### Path to P.generosa-specific repeat library
-repeat_library=
+repeat_library=/gscratch/srlab/sam/data/P_generosa/generosa_repeats/Pgenerosa_v070-families.fa
 
-
+### Path to SwissProt database
+sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 
 
 ## Create Maker control files needed for running Maker, only if it doesn't already exist and then edit it.
@@ -137,7 +146,7 @@ ${maker2zff} ../Pgenerosa_v70.all.gff
 ${fathom} -categorize 1000 genome.ann genome.dna
 ${fathom} -export 1000 -plus uni.ann uni.dna
 ${forge} export.ann export.dna
-${hmmassembler} test_snap1 . > 20181220_geoduck_snap01.hmm
+${hmmassembler} genome . > 20181220_geoduck_snap01.hmm
 
 ## Initiate second Maker run.
 ### Copy initial maker control files and
@@ -178,7 +187,7 @@ ${maker2zff} ../snap01/20181220_geoduck_snap01.all.gff
 ${fathom} -categorize 1000 genome.ann genome.dna
 ${fathom} -export 1000 -plus uni.ann uni.dna
 ${forge} export.ann export.dna
-${hmmassembler} test_snap1 . > 20181220_geoduck_snap02.hmm
+${hmmassembler} genome . > 20181220_geoduck_snap02.hmm
 
 ## Initiate third and final Maker run.
 ### Copy initial maker control files and:
@@ -201,3 +210,10 @@ mpiexec -n 56 $maker \
 ## Merge gffs
 ${gff3_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181127_oly_genome_snap02_master_datastore_index.log
+
+# Run InterProScan 5
+## disable-precalc since this requires external database access (which Mox does not allow)
+${interproscan} \
+--input ${maker_prot_fasta} \
+--goterms \
+--disable-precalc
