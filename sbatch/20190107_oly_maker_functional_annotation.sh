@@ -44,14 +44,14 @@ maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_a
 maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/Olurida_v081.all.maker.transcripts.fasta
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
 maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20181220_outfmt6.blastp
-maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/
+maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/Olurida_v081.all.maker.proteins.fasta.tsv
 sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 
 cp ${maker_prot_fasta} Olurida_v081.all.maker.proteins.renamed.fasta
 cp ${maker_transcripts_fasta} Olurida_v081.all.maker.transcripts.renamed.fasta
 cp ${snap02_gff} 20181127_oly_genome_snap02.all.noseqs.renamed.gff
 cp ${maker_blastp} 20181220_outfmt6.renamed.blastp
-cp ${maker_ips}
+cp ${maker_ips} Olurida_v081.all.maker.proteins.fasta.renamed.tsv
 
 # Run MAKER programs
 ## Change gene names
@@ -84,10 +84,9 @@ ${maker_dir}/map_data_ids \
 20181220_outfmt6.renamed.blastp
 
 ## Map InterProScan5
-## Map BLASTp
 ${maker_dir}/map_data_ids \
 20181127_oly_genome.map \
-
+Olurida_v081.all.maker.proteins.fasta.renamed.tsv
 
 ## Add putative gene functions
 ### GFF
@@ -114,11 +113,11 @@ Olurida_v081.all.maker.transcripts.renamed.fasta \
 ### Add searchable tags
 ${maker_dir}/ipr_update_gff \
 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff \
- \
+Olurida_v081.all.maker.proteins.fasta.renamed.tsv \
 > 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.domain_added.gff
 
 ### Add viewable features for genome browsers (JBrowse, Gbrowse, Web Apollo)
 ${maker_dir}/iprscan2gff3 \
- \
+Olurida_v081.all.maker.proteins.fasta.renamed.tsv \
 20181127_oly_genome_snap02.all.noseqs.renamed.gff \
 > visible_ips_domains.gff
