@@ -44,8 +44,10 @@ export BLASTDB=/gscratch/srlab/blastdbs/UniProtKB_20181008/
 
 ## Establish variables for more readable code
 
-### Paths to Maker binaries
 work_dir=$(pwd)
+
+### Paths to Maker binaries
+
 maker=/gscratch/srlab/programs/maker-2.31.10/bin/maker
 gff3_merge=/gscratch/srlab/programs/maker-2.31.10/bin/gff3_merge
 maker2zff=/gscratch/srlab/programs/maker-2.31.10/bin/maker2zff
@@ -56,8 +58,14 @@ fasta_merge=/gscratch/srlab/programs/maker-2.31.10/bin/fasta_merge
 map_ids=/gscratch/srlab/programs/maker-2.31.10/bin/maker_map_ids
 map_gff_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_gff_ids
 map_fasta_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
-blastp_dir=/gscratch/scrubbed/samwhite/outputs/20181220_geoduck_maker_genome_annotation
-maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_geoduck_maker_genome_annotation/
+
+
+blastp_dir=${wd}/
+maker_blastp=${wd}/
+maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
+maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
+snap02_gff=${wd}//snap02/20181220_geoduck_snap02.all.gff
+maker_ips=${wd}/
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -222,8 +230,6 @@ ${gff3_merge} \
 ## Merge FastAs
 ${fasta_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
-
-
 
 
 # Run InterProScan 5
