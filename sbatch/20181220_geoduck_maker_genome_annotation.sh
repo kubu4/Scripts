@@ -151,6 +151,7 @@ ${hmmassembler} genome . > 20181220_geoduck_snap01.hmm
 ## Initiate second Maker run.
 ### Copy initial maker control files and
 ### - change gene prediction settings to 0 (i.e. don't generate Maker gene predictions)
+### - use GFF subsets generated in first round of MAKER
 ### - set location of snaphmm file to use for gene prediction
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
@@ -194,6 +195,7 @@ ${hmmassembler} genome . > 20181220_geoduck_snap02.hmm
 ## Initiate third and final Maker run.
 ### Copy initial maker control files and:
 ### - change gene prediction settings to 0 (i.e. don't generate Maker gene predictions)
+### - use GFF subsets generated in first round of SNAP
 ### - set location of snaphmm file to use for gene prediction
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
