@@ -50,7 +50,7 @@ sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 cp ${maker_prot_fasta} 20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta
 cp ${maker_transcripts_fasta} 20181127_oly_genome_snap02.all.maker.transcripts.renamed.fasta
 cp ${snap02_gff} 20181127_oly_genome_snap02.all.noseqs.renamed.gff
-cp ${maker_blastp} 20181220_outfmt6.renamed.blastp
+cp ${maker_blastp} 20190107_blastp.renamed.outfmt6
 cp ${maker_ips} Olurida_v081.all.maker.proteins.fasta.renamed.tsv
 
 # Run MAKER programs
@@ -81,7 +81,7 @@ Olurida_v081.all.maker.transcripts.renamed.fasta
 ## Map BLASTp
 ${maker_dir}/map_data_ids \
 20181127_oly_genome.map \
-20181220_outfmt6.renamed.blastp
+20190107_blastp.renamed.outfmt6
 
 ## Map InterProScan5
 ${maker_dir}/map_data_ids \
@@ -105,7 +105,7 @@ ${sp_db} \
 ### Transcripts
 ${maker_dir}/maker_functional_fasta \
 ${sp_db} \
-20181220_outfmt6.renamed.blastp \
+20190107_blastp.renamed.outfmt6 \
 Olurida_v081.all.maker.transcripts.renamed.fasta \
 > Olurida_v081.all.maker.transcripts.renamed.putative_function.fasta
 
