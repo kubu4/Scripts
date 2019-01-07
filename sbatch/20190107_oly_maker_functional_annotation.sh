@@ -120,4 +120,4 @@ Olurida_v081.all.maker.proteins.fasta.renamed.tsv \
 ${maker_dir}/iprscan2gff3 \
 Olurida_v081.all.maker.proteins.fasta.renamed.tsv \
 20181127_oly_genome_snap02.all.noseqs.renamed.gff \
-> visible_ips_domains.gff
+> 20181127_oly_genome_snap02.all.noseqs.visible_ips_domains.gff
