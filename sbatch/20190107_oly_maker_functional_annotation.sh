@@ -38,5 +38,10 @@ printf "%0.s-" {1..10} >> system_path.log
 echo ${PATH} | tr : \\n >> system_path.log
 
 # Variables
+maker_dir=/gscratch/srlab/programs/maker-2.31.10/bin
+
 maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/Olurida_v081.all.maker.proteins.fasta
+maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/Olurida_v081.all.maker.transcripts.fasta
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
+maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20181220_outfmt6.blastp
+maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/
