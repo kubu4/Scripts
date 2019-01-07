@@ -155,6 +155,8 @@ ${hmmassembler} genome . > 20181220_geoduck_snap01.hmm
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
   sed -i "/^genome=/ s% %$genome %" maker_opts.ctl
+  sed -i "/^est2genome=1/ s/est2genome=1/est2genome=0/" maker_opts.ctl
+  sed -i "/^protein2genome=1/ s/protein2genome=1/protein2genome=0/" maker_opts.ctl
   sed -i "/^est_gff=/ s% %../Pgenerosa_v70.maker.all.noseqs.est2genome.gff %" maker_opts.ctl
   sed -i "/^protein_gff=/ s% %../Pgenerosa_v70.maker.all.noseqs.protein2genome.gff %" maker_opts.ctl
   sed -i "/^rm_gff=/ s% %../Pgenerosa_v70.maker.all.noseqs.repeats.gff %" maker_opts.ctl
@@ -196,6 +198,8 @@ ${hmmassembler} genome . > 20181220_geoduck_snap02.hmm
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
   sed -i "/^genome=/ s% %$genome %" maker_opts.ctl
+  sed -i "/^est2genome=1/ s/est2genome=1/est2genome=0/" maker_opts.ctl
+  sed -i "/^protein2genome=1/ s/protein2genome=1/protein2genome=0/" maker_opts.ctl
   sed -i "/^est_gff=/ s% %../20181220_geoduck_snap01.maker.all.noseqs.est2genome.gff %" maker_opts.ctl
   sed -i "/^protein_gff=/ s% %../20181220_geoduck_snap01.maker.all.noseqs.protein2genome.gff %" maker_opts.ctl
   sed -i "/^rm_gff=/ s% %../20181220_geoduck_snap01.maker.all.noseqs.repeats.gff %" maker_opts.ctl
