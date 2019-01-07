@@ -45,6 +45,7 @@ maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_g
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
 maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20181220_outfmt6.blastp
 maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/
+sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 
 cp ${maker_prot_fasta} Olurida_v081.all.maker.proteins.renamed.fasta
 cp ${maker_transcripts_fasta} Olurida_v081.all.maker.transcripts.renamed.fasta
@@ -59,10 +60,12 @@ ${maker_dir}/map_gff_ids \
 20181127_oly_genome_snap02.all.noseqs.renamed.gff
 
 ## Map FastAs
+### Proteins
 ${maker_dir}/map_fasta_ids \
 20181127_oly_genome.map \
-Olurida_v081.all.maker.transcripts.renamed.fasta
+Olurida_v081.all.maker.proteins.renamed.fasta
 
+### Transcripts
 ${maker_dir}/map_fasta_ids \
 20181127_oly_genome.map \
 Olurida_v081.all.maker.transcripts.renamed.fasta
@@ -76,3 +79,25 @@ ${maker_dir}/map_data_ids \
 ## Map BLASTp
 ${maker_dir}/map_data_ids \
 20181127_oly_genome.map \
+
+
+## Add putative gene functions
+### GFF
+${maker_dir}/maker_functional_gff \
+${sp_db} \
+20181220_outfmt6.renamed.blastp \
+20181127_oly_genome_snap02.all.noseqs.renamed.gff \
+> 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff
+
+### Proteins
+${maker_dir}/maker_functional_fasta \
+${sp_db} \
+20181220_outfmt6.renamed.blastp \
+> Olurida_v081.all.maker.proteins.renamed.putative_function.fasta
+
+### Transcripts
+${maker_dir}/maker_functional_fasta \
+${sp_db} \
+20181220_outfmt6.renamed.blastp \
+Olurida_v081.all.maker.transcripts.renamed.fasta \
+> Olurida_v081.all.maker.transcripts.renamed.putative_function.fasta
