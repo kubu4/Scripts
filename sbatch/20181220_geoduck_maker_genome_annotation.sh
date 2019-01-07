@@ -64,7 +64,7 @@ blastp_dir=${wd}/blastp_annotation
 maker_blastp=${wd}/blastp_annotation/20181220_blastp.outfmt6
 maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
 maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
-snap02_gff=${wd}//snap02/20181220_geoduck_snap02.all.gff
+snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
 maker_ips=${wd}/interproscan_annotation
 
 ## Path to blastp
@@ -242,7 +242,21 @@ ${fasta_merge} \
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
+cd ${interproscan_annotation}
+
 ${interproscan} \
 --input ${maker_prot_fasta} \
 --goterms \
 --disable-precalc
+
+# Run BLASTp
+cd ${blastp_annotation}
+
+${blastp} \
+-query ${maker_prot_fasta} \
+-db ${sp_db} \
+-out ${maker_blastp} \
+-max_target_seqs 1 \
+-evalue 1e-6 \
+-outfmt 6 \
+-num_threads 28
