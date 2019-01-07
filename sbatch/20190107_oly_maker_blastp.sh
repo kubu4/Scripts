@@ -44,7 +44,7 @@ export BLASTDB=/gscratch/srlab/blastdbs/UniProtKB_20181008/
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
 uniprot_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
 maker_p_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.proteins.fasta
-output=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20190107_blastp.outfmt6
+output=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_blastp/20190107_blastp.outfmt6
 
 # Run blastp
 ${blastp} \
