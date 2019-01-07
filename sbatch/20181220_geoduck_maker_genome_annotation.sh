@@ -215,7 +215,11 @@ mpiexec -n 56 $maker \
 
 ## Merge gffs
 ${gff3_merge} \
--d 20181220_geoduck_snap02.maker.output/20181127_oly_genome_snap02_master_datastore_index.log
+-d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
+
+## Merge FastAs
+${fasta_merge} \
+-d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
