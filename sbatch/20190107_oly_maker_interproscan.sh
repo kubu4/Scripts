@@ -6,7 +6,7 @@
 #SBATCH --partition=srlab
 ## Resources
 ## Nodes
-#SBATCH --nodes=2
+#SBATCH --nodes=1
 ## Walltime (days-hours:minutes:seconds format)
 #SBATCH --time=15-00:00:00
 ## Memory per node
@@ -39,7 +39,7 @@ echo ${PATH} | tr : \\n >> system_path.log
 
 # Variables
 interproscan=/gscratch/srlab/programs/interproscan-5.31-70.0/interproscan.sh
-maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/Olurida_v081.all.maker.proteins.fasta
+maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.proteins.fasta
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
