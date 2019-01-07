@@ -45,6 +45,7 @@ export BLASTDB=/gscratch/srlab/blastdbs/UniProtKB_20181008/
 ## Establish variables for more readable code
 
 ### Paths to Maker binaries
+work_dir=$(pwd)
 maker=/gscratch/srlab/programs/maker-2.31.10/bin/maker
 gff3_merge=/gscratch/srlab/programs/maker-2.31.10/bin/gff3_merge
 maker2zff=/gscratch/srlab/programs/maker-2.31.10/bin/maker2zff
@@ -54,8 +55,9 @@ hmmassembler=/gscratch/srlab/programs/maker-2.31.10/exe/snap/hmm-assembler.pl
 fasta_merge=/gscratch/srlab/programs/maker-2.31.10/bin/fasta_merge
 map_ids=/gscratch/srlab/programs/maker-2.31.10/bin/maker_map_ids
 map_gff_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_gff_ids
-map_fasta_ids/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
-
+map_fasta_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
+blastp_dir=/gscratch/scrubbed/samwhite/outputs/20181220_geoduck_maker_genome_annotation
+maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_geoduck_maker_genome_annotation/
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -220,6 +222,9 @@ ${gff3_merge} \
 ## Merge FastAs
 ${fasta_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
+
+
+
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
