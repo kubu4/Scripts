@@ -92,14 +92,14 @@ Olurida_v081.all.maker.proteins.fasta.renamed.tsv
 ### GFF
 ${maker_dir}/maker_functional_gff \
 ${sp_db} \
-20181220_outfmt6.renamed.blastp \
+20190107_blastp.renamed.outfmt6 \
 20181127_oly_genome_snap02.all.noseqs.renamed.gff \
 > 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff
 
 ### Proteins
 ${maker_dir}/maker_functional_fasta \
 ${sp_db} \
-20181220_outfmt6.renamed.blastp \
+20190107_blastp.renamed.outfmt6 \
 > Olurida_v081.all.maker.proteins.renamed.putative_function.fasta
 
 ### Transcripts
