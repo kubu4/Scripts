@@ -45,3 +45,34 @@ maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_g
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
 maker_blastp=/gscratch/scrubbed/samwhite/outputs/20181220_oly_maker_blastp/20181220_outfmt6.blastp
 maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/
+
+cp ${maker_prot_fasta} Olurida_v081.all.maker.proteins.renamed.fasta
+cp ${maker_transcripts_fasta} Olurida_v081.all.maker.transcripts.renamed.fasta
+cp ${snap02_gff} 20181127_oly_genome_snap02.all.noseqs.renamed.gff
+cp ${maker_blastp} 20181220_outfmt6.renamed.blastp
+cp ${maker_ips}
+
+# Run MAKER programs
+## Map GFF IDs
+${maker_dir}/map_gff_ids \
+20181127_oly_genome.map \
+20181127_oly_genome_snap02.all.noseqs.renamed.gff
+
+## Map FastAs
+${maker_dir}/map_fasta_ids \
+20181127_oly_genome.map \
+Olurida_v081.all.maker.transcripts.renamed.fasta
+
+${maker_dir}/map_fasta_ids \
+20181127_oly_genome.map \
+Olurida_v081.all.maker.transcripts.renamed.fasta
+
+## Map BLASTp
+${maker_dir}/map_data_ids \
+20181127_oly_genome.map \
+20181220_outfmt6.renamed.blastp
+
+## Map InterProScan5
+## Map BLASTp
+${maker_dir}/map_data_ids \
+20181127_oly_genome.map \
