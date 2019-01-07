@@ -46,4 +46,5 @@ maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_a
 ${interproscan} \
 --input ${maker_prot_fasta} \
 --goterms \
+--output-file-base 20181127_oly_maker_proteins_ips \
 --disable-precalc
