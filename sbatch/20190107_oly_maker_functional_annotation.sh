@@ -54,6 +54,14 @@ cp ${maker_blastp} 20181220_outfmt6.renamed.blastp
 cp ${maker_ips}
 
 # Run MAKER programs
+## Change gene names
+${maker_dir}/maker_map_ids \
+--prefix Olurida_ \
+--justify 8 \
+${snap02_gff} \
+> 20181127_oly_genome.map
+
+
 ## Map GFF IDs
 ${maker_dir}/map_gff_ids \
 20181127_oly_genome.map \
