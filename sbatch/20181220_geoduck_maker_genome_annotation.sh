@@ -60,12 +60,12 @@ map_gff_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_gff_ids
 map_fasta_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
 
 
-blastp_dir=${wd}/
-maker_blastp=${wd}/
+blastp_dir=${wd}/blastp_annotation
+maker_blastp=${wd}/blastp_annotation/20181220_blastp.outfmt6
 maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
 maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
 snap02_gff=${wd}//snap02/20181220_geoduck_snap02.all.gff
-maker_ips=${wd}/
+maker_ips=${wd}/interproscan_annotation
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -99,6 +99,10 @@ repeat_library=/gscratch/srlab/sam/data/P_generosa/generosa_repeats/Pgenerosa_v0
 
 ### Path to SwissProt database
 sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
+
+## Make directories
+mkdir blastp_annotation
+mkdir interproscan_annotation
 
 
 ## Create Maker control files needed for running Maker, only if it doesn't already exist and then edit it.
@@ -163,6 +167,8 @@ ${hmmassembler} genome . > 20181220_geoduck_snap01.hmm
 ### - change gene prediction settings to 0 (i.e. don't generate Maker gene predictions)
 ### - use GFF subsets generated in first round of MAKER
 ### - set location of snaphmm file to use for gene prediction
+### Percent symbols used below are the sed delimiters, instead of the default "/",
+### due to the need to use file paths.
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
   sed -i "/^genome=/ s% %$genome %" maker_opts.ctl
@@ -206,7 +212,9 @@ ${hmmassembler} genome . > 20181220_geoduck_snap02.hmm
 ### Copy initial maker control files and:
 ### - change gene prediction settings to 0 (i.e. don't generate Maker gene predictions)
 ### - use GFF subsets generated in first round of SNAP
-### - set location of snaphmm file to use for gene prediction
+### - set location of snaphmm file to use for gene prediction.
+### Percent symbols used below are the sed delimiters, instead of the default "/",
+### due to the need to use file paths.
 if [ ! -e maker_opts.ctl ]; then
   $maker -CTL
   sed -i "/^genome=/ s% %$genome %" maker_opts.ctl
