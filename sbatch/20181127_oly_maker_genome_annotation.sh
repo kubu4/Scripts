@@ -113,7 +113,7 @@ ${maker2zff} ../Olurida_v081.all.gff
 ${fathom} -categorize 1000 genome.ann genome.dna
 ${fathom} -export 1000 -plus uni.ann uni.dna
 ${forge} export.ann export.dna
-${hmmassembler} test_snap1 . > 20181127__oly_snap01.hmm
+${hmmassembler} genome . > 20181127__oly_snap01.hmm
 
 ## Initiate second Maker run.
 ### Copy initial maker control files and
@@ -145,7 +145,7 @@ ${maker2zff} ../snap01/20181127_oly_genome_snap01.all.gff
 ${fathom} -categorize 1000 genome.ann genome.dna
 ${fathom} -export 1000 -plus uni.ann uni.dna
 ${forge} export.ann export.dna
-${hmmassembler} test_snap1 . > 20181127__oly_snap02.hmm
+${hmmassembler} genome . > 20181127__oly_snap02.hmm
 
 ## Initiate third and final Maker run.
 ### Copy initial maker control files and:
