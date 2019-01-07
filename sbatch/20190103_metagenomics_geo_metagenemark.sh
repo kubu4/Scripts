@@ -61,4 +61,5 @@ ${gmhmmp} \
 -D ${nuc_out} \
 -f 3 \
 -m ${mgm_mod} \
+${assembly_fasta} \
 -o ${gff_out}
