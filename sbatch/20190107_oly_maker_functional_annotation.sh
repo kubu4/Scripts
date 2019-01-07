@@ -101,3 +101,16 @@ ${sp_db} \
 20181220_outfmt6.renamed.blastp \
 Olurida_v081.all.maker.transcripts.renamed.fasta \
 > Olurida_v081.all.maker.transcripts.renamed.putative_function.fasta
+
+## Add InterProScan domain info
+### Add searchable tags
+${maker_dir}/ipr_update_gff \
+20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff \
+ \
+> 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.domain_added.gff
+
+### Add viewable features for genome browsers (JBrowse, Gbrowse, Web Apollo)
+${maker_dir}/iprscan2gff3 \
+ \
+20181127_oly_genome_snap02.all.noseqs.renamed.gff \
+> visible_ips_domains.gff
