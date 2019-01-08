@@ -1,4 +1,4 @@
-${maker_dir}#!/bin/bash
+#!/bin/bash
 ## Job Name
 #SBATCH --job-name=2018120_geoduck_maker_genome_annotation
 ## Allocation Definition
