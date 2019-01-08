@@ -112,8 +112,11 @@ combined_proteomes=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome
 ### Path to P.generosa-specific repeat library
 repeat_library=/gscratch/srlab/sam/data/P_generosa/generosa_repeats/Pgenerosa_v070-families.fa
 
-### Path to SwissProt database
-sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
+### Path to SwissProt database for BLASTp
+sp_db_blastp=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
+
+### Path to SwissProt database for annotations
+sp_db_annotations=/gscratch/srlab/blastdbs/UniProtKB_20181008/20190108_uniprot_sprot.dat
 
 ## Make directories
 mkdir blastp_annotation
@@ -301,7 +304,7 @@ cd ${blastp_annotation}
 
 ${blastp} \
 -query ${maker_prot_fasta_renamed} \
--db ${sp_db} \
+-db ${sp_db_blastp} \
 -out ${maker_blastp} \
 -max_target_seqs 1 \
 -evalue 1e-6 \
@@ -316,21 +319,21 @@ cd {$wd}
 ## Add putative gene functions
 ### GFF
 ${functional_gff} \
-${sp_db} \
+${sp_db_annotations} \
 ${maker_blastp} \
 ${snap02_gff_renamed} \
 > ${put_func_gff}
 
 ### Proteins
 ${maker_functional_fasta} \
-${sp_db} \
+${sp_db_annotations} \
 ${maker_blastp} \
 ${maker_prot_fasta_renamed} \
 > ${put_func_prot}
 
 ### Transcripts
 ${maker_functional_fasta} \
-${sp_db} \
+${sp_db_annotations} \
 ${maker_blastp} \
 ${maker_transcripts_fasta_renamed} \
 > ${put_func_trans}
