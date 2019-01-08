@@ -100,6 +100,7 @@ ${sp_db} \
 ${maker_dir}/maker_functional_fasta \
 ${sp_db} \
 20190107_blastp.renamed.outfmt6 \
+20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta \
 > 20181127_oly_genome_snap02.all.maker.proteins.renamed.putative_function.fasta
 
 ### Transcripts
