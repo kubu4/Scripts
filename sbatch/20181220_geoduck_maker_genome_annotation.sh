@@ -69,6 +69,8 @@ maker_transcripts_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.t
 snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
 snap02_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.all.renamed.gff
 ips_dir=${wd}/interproscan_annotation
+ips_name=20180108_geoduck_maker_proteins_ips
+id_map=${wd}/snap02/20181220_geoduck_genome.map
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -256,23 +258,23 @@ ${maker_map_ids} \
 --prefix PGEN_ \
 --justify 8 \
 ${snap02_gff} \
-> 20181220_geoduck_genome.map
+> ${id_map}
 
 ## Map GFF IDs
 ${maker_dir}/map_gff_ids \
-20181127_oly_genome.map \
-20181127_oly_genome_snap02.all.renamed.gff
+${id_map} \
+${snap02_gff_renamed}
 
 ## Map FastAs
 ### Proteins
 ${maker_dir}/map_fasta_ids \
-20181127_oly_genome.map \
-20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta
+${id_map} \
+${maker_prot_fasta_renamed}
 
 ### Transcripts
 ${maker_dir}/map_fasta_ids \
-20181127_oly_genome.map \
-20181127_oly_genome_snap02.all.maker.transcripts.renamed.fasta
+${id_map} \
+${maker_transcripts_fasta_renamed}
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
@@ -281,7 +283,7 @@ cd ${ips_dir}
 ${interproscan} \
 --input ${maker_prot_fasta_renamed} \
 --goterms \
---output-file-base 20180108_geoduck_maker_proteins_ips \
+--output-file-base ${ips_name} \
 --disable-precalc
 
 # Run BLASTp
