@@ -66,8 +66,6 @@ maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
 maker_prot_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.renamed.fasta
 maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
 maker_transcripts_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.renamed.fasta
-maker_gff=${wd}/snap02/20181220_geoduck_snap02.maker.all.noseqs.gff
-maker_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.maker.all.noseqs.renamed.gff
 snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
 snap02_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.all.renamed.gff
 ips_dir=${wd}/interproscan_annotation
@@ -250,10 +248,31 @@ ${fasta_merge} \
 # Create copies of files for mapping
 cp ${maker_prot_fasta} ${maker_prot_fasta_renamed}
 cp ${maker_transcripts_fasta} ${maker_transcripts_fasta_renamed}
-cp ${maker_gff} ${maker_functional_gff}
+cp ${snap02_gff} ${snap02_gff_renamed}
 
 # Map IDs
+## Change gene names
+${maker_map_ids} \
+--prefix PGEN_ \
+--justify 8 \
+${snap02_gff} \
+> 20181220_geoduck_genome.map
 
+## Map GFF IDs
+${maker_dir}/map_gff_ids \
+20181127_oly_genome.map \
+20181127_oly_genome_snap02.all.renamed.gff
+
+## Map FastAs
+### Proteins
+${maker_dir}/map_fasta_ids \
+20181127_oly_genome.map \
+20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta
+
+### Transcripts
+${maker_dir}/map_fasta_ids \
+20181127_oly_genome.map \
+20181127_oly_genome_snap02.all.maker.transcripts.renamed.fasta
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
