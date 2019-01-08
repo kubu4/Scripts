@@ -15,7 +15,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=samwhite@uw.edu
 ## Specify the working directory for this job
-#SBATCH --workdir=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan
+#SBATCH --workdir=/gscratch/scrubbed/samwhite/outputs/20190108_oly_maker_interproscan
 
 # Load Python Mox module for Python module availability
 
