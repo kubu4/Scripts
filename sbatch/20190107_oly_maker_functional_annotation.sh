@@ -45,7 +45,7 @@ maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_g
 snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
 maker_blastp=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_blastp/20190107_blastp.outfmt6
 maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/20181127_oly_maker_proteins_ips.tsv
-sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20181008_uniprot_sprot.fasta
+sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20190108_uniprot_sprot.dat
 
 cp ${maker_prot_fasta} 20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta
 cp ${maker_transcripts_fasta} 20181127_oly_genome_snap02.all.maker.transcripts.renamed.fasta
