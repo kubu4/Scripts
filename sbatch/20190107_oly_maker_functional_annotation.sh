@@ -42,14 +42,14 @@ maker_dir=/gscratch/srlab/programs/maker-2.31.10/bin
 
 maker_prot_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.proteins.fasta
 maker_transcripts_fasta=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.maker.transcripts.fasta
-snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.noseqs.gff
+snap02_gff=/gscratch/scrubbed/samwhite/outputs/20181127_oly_maker_genome_annotation/snap02/20181127_oly_genome_snap02.all.gff
 maker_blastp=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_blastp/20190107_blastp.outfmt6
 maker_ips=/gscratch/scrubbed/samwhite/outputs/20190107_oly_maker_interproscan/20181127_oly_maker_proteins_ips.tsv
 sp_db=/gscratch/srlab/blastdbs/UniProtKB_20181008/20190108_uniprot_sprot.dat
 
 cp ${maker_prot_fasta} 20181127_oly_genome_snap02.all.maker.proteins.renamed.fasta
 cp ${maker_transcripts_fasta} 20181127_oly_genome_snap02.all.maker.transcripts.renamed.fasta
-cp ${snap02_gff} 20181127_oly_genome_snap02.all.noseqs.renamed.gff
+cp ${snap02_gff} 20181127_oly_genome_snap02.all.renamed.gff
 cp ${maker_blastp} 20190107_blastp.renamed.outfmt6
 cp ${maker_ips} 20181127_oly_maker_proteins_ips.renamed.tsv
 
@@ -65,7 +65,7 @@ ${snap02_gff} \
 ## Map GFF IDs
 ${maker_dir}/map_gff_ids \
 20181127_oly_genome.map \
-20181127_oly_genome_snap02.all.noseqs.renamed.gff
+20181127_oly_genome_snap02.all.renamed.gff
 
 ## Map FastAs
 ### Proteins
@@ -93,8 +93,8 @@ ${maker_dir}/map_data_ids \
 ${maker_dir}/maker_functional_gff \
 ${sp_db} \
 20190107_blastp.renamed.outfmt6 \
-20181127_oly_genome_snap02.all.noseqs.renamed.gff \
-> 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff
+20181127_oly_genome_snap02.all.renamed.gff \
+> 20181127_oly_genome_snap02.all.renamed.putative_function.gff
 
 ### Proteins
 ${maker_dir}/maker_functional_fasta \
@@ -113,12 +113,12 @@ ${sp_db} \
 ## Add InterProScan domain info
 ### Add searchable tags
 ${maker_dir}/ipr_update_gff \
-20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.gff \
+20181127_oly_genome_snap02.all.renamed.putative_function.gff \
 20181127_oly_maker_proteins_ips.renamed.tsv \
-> 20181127_oly_genome_snap02.all.noseqs.renamed.putative_function.domain_added.gff
+> 20181127_oly_genome_snap02.all.renamed.putative_function.domain_added.gff
 
 ### Add viewable features for genome browsers (JBrowse, Gbrowse, Web Apollo)
 ${maker_dir}/iprscan2gff3 \
 20181127_oly_maker_proteins_ips.renamed.tsv \
-20181127_oly_genome_snap02.all.noseqs.renamed.gff \
-> 20181127_oly_genome_snap02.all.noseqs.renamed.visible_ips_domains.gff
+20181127_oly_genome_snap02.all.renamed.gff \
+> 20181127_oly_genome_snap02.all.renamed.visible_ips_domains.gff
