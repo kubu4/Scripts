@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Job Name
-#SBATCH --job-name=2018120_geoduck_maker_genome_annotation
+#SBATCH --job-name=maker
 ## Allocation Definition
 #SBATCH --account=srlab
 #SBATCH --partition=srlab
