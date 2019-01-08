@@ -63,9 +63,12 @@ map_fasta_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
 blastp_dir=${wd}/blastp_annotation
 maker_blastp=${wd}/blastp_annotation/20181220_blastp.outfmt6
 maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
+maker_prot_fasta_renamed=${wd}20181220_geoduck_snap02.all.maker.proteins.renamed.fasta
 maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
+maker_transcripts_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.renamed.fasta
 snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
-maker_ips=${wd}/interproscan_annotation
+snap02_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.all.renamed.gff
+ips_dir=${wd}/interproscan_annotation
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -235,6 +238,9 @@ mpiexec -n 56 $maker \
 ${gff3_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
 
+## GFF with no FastA in footer
+${gff3_merge} -n -s -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log > 20181220_geoduck_snap02.maker.all.noseqs.gff
+
 ## Merge FastAs
 ${fasta_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
@@ -242,18 +248,19 @@ ${fasta_merge} \
 
 # Run InterProScan 5
 ## disable-precalc since this requires external database access (which Mox does not allow)
-cd ${interproscan_annotation}
+cd ${ips_dir}
 
 ${interproscan} \
---input ${maker_prot_fasta} \
+--input ${maker_prot_fasta_renamed} \
 --goterms \
+--output-file-base 20180108_geoduck_maker_proteins_ips \
 --disable-precalc
 
 # Run BLASTp
 cd ${blastp_annotation}
 
 ${blastp} \
--query ${maker_prot_fasta} \
+-query ${maker_prot_fasta_renamed} \
 -db ${sp_db} \
 -out ${maker_blastp} \
 -max_target_seqs 1 \
