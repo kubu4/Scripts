@@ -51,7 +51,7 @@ cp ${snap02_gff} 20181127_oly_genome_snap02.all.renamed.gff
 # Run MAKER programs
 ## Change gene names
 ${maker_dir}/maker_map_ids \
---prefix Olurida_ \
+--prefix OLUR_ \
 --justify 8 \
 ${snap02_gff} \
 > 20181127_oly_genome.map
