@@ -66,6 +66,8 @@ maker_prot_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.fasta
 maker_prot_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.proteins.renamed.fasta
 maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.fasta
 maker_transcripts_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.renamed.fasta
+maker_gff=${wd}/snap02/20181220_geoduck_snap02.maker.all.noseqs.gff
+maker_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.maker.all.noseqs.renamed.gff
 snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
 snap02_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.all.renamed.gff
 ips_dir=${wd}/interproscan_annotation
@@ -244,6 +246,13 @@ ${gff3_merge} -n -s -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_sna
 ## Merge FastAs
 ${fasta_merge} \
 -d 20181220_geoduck_snap02.maker.output/20181220_geoduck_snap02_master_datastore_index.log
+
+# Create copies of files for mapping
+cp ${maker_prot_fasta} ${maker_prot_fasta_renamed}
+cp ${maker_transcripts_fasta} ${maker_transcripts_fasta_renamed}
+cp ${maker_gff} ${maker_functional_gff}
+
+# Map IDs
 
 
 # Run InterProScan 5
