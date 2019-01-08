@@ -1,4 +1,4 @@
-#!/bin/bash
+${maker_dir}#!/bin/bash
 ## Job Name
 #SBATCH --job-name=2018120_geoduck_maker_genome_annotation
 ## Allocation Definition
@@ -45,20 +45,24 @@ export BLASTDB=/gscratch/srlab/blastdbs/UniProtKB_20181008/
 ## Establish variables for more readable code
 
 work_dir=$(pwd)
-
+maker_dir=/gscratch/srlab/programs/maker-2.31.10/bin
+snap_dir=/gscratch/srlab/programs/maker-2.31.10/exe/snap
 ### Paths to Maker binaries
 
-maker=/gscratch/srlab/programs/maker-2.31.10/bin/maker
-gff3_merge=/gscratch/srlab/programs/maker-2.31.10/bin/gff3_merge
-maker2zff=/gscratch/srlab/programs/maker-2.31.10/bin/maker2zff
-fathom=/gscratch/srlab/programs/maker-2.31.10/exe/snap/fathom
-forge=/gscratch/srlab/programs/maker-2.31.10/exe/snap/forge
-hmmassembler=/gscratch/srlab/programs/maker-2.31.10/exe/snap/hmm-assembler.pl
-fasta_merge=/gscratch/srlab/programs/maker-2.31.10/bin/fasta_merge
-map_ids=/gscratch/srlab/programs/maker-2.31.10/bin/maker_map_ids
-map_gff_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_gff_ids
-map_fasta_ids=/gscratch/srlab/programs/maker-2.31.10/bin/map_fasta_ids
-
+maker=${maker_dir}/maker
+gff3_merge=${maker_dir}/gff3_merge
+maker2zff=${maker_dir}/maker2zff
+fathom=${snap_dir}/fathom
+forge=${snap_dir}/forge
+hmmassembler=${snap_dir}/hmm-assembler.pl
+fasta_merge=${maker_dir}/fasta_merge
+map_ids=${maker_dir}/maker_map_ids
+map_gff_ids=${maker_dir}/map_gff_ids
+map_fasta_ids=${maker_dir}/map_fasta_ids
+functional_fasta=${maker_dir}/maker_functional_fasta
+functional_gff=${maker_dir}/maker_functional_gff
+ipr_update_gff=${maker_dir}/ipr_update_gff
+iprscan2gff3=${maker_dir}/iprscan2gff3
 
 blastp_dir=${wd}/blastp_annotation
 maker_blastp=${wd}/blastp_annotation/20181220_blastp.outfmt6
@@ -68,9 +72,15 @@ maker_transcripts_fasta=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcrip
 maker_transcripts_fasta_renamed=${wd}/snap02/20181220_geoduck_snap02.all.maker.transcripts.renamed.fasta
 snap02_gff=${wd}/snap02/20181220_geoduck_snap02.all.gff
 snap02_gff_renamed=${wd}/snap02/20181220_geoduck_snap02.all.renamed.gff
+put_func_gff=20181220_geoduck_genome_snap02.all.renamed.putative_function.gff
+put_func_prot=20181220_geoduck_genome_snap02.all.maker.proteins.renamed.putative_function.fasta
+put_func_trans=20181220_geoduck_genome_snap02.all.maker.transcripts.renamed.putative_function.fasta
+put_domain_gff=20181220_geoduck_genome_snap02.all.renamed.putative_function.domain_added.gff
 ips_dir=${wd}/interproscan_annotation
-ips_name=20180108_geoduck_maker_proteins_ips
+ips_base=20180108_geoduck_maker_proteins_ips
+ips_name=20180108_geoduck_maker_proteins_ips.tsv
 id_map=${wd}/snap02/20181220_geoduck_genome.map
+ips_domains=20181220_geoduck_genome_snap02.all.renamed.visible_ips_domains.gff
 
 ## Path to blastp
 blastp=/gscratch/srlab/programs/ncbi-blast-2.6.0+/bin/blastp
@@ -261,18 +271,18 @@ ${snap02_gff} \
 > ${id_map}
 
 ## Map GFF IDs
-${maker_dir}/map_gff_ids \
+${map_gff_ids} \
 ${id_map} \
 ${snap02_gff_renamed}
 
 ## Map FastAs
 ### Proteins
-${maker_dir}/map_fasta_ids \
+${map_fasta_ids} \
 ${id_map} \
 ${maker_prot_fasta_renamed}
 
 ### Transcripts
-${maker_dir}/map_fasta_ids \
+${map_fasta_ids} \
 ${id_map} \
 ${maker_transcripts_fasta_renamed}
 
@@ -283,7 +293,7 @@ cd ${ips_dir}
 ${interproscan} \
 --input ${maker_prot_fasta_renamed} \
 --goterms \
---output-file-base ${ips_name} \
+--output-file-base ${ips_base} \
 --disable-precalc
 
 # Run BLASTp
@@ -297,3 +307,43 @@ ${blastp} \
 -evalue 1e-6 \
 -outfmt 6 \
 -num_threads 28
+
+
+# Functional annotations
+
+cd {$wd}
+
+## Add putative gene functions
+### GFF
+${functional_gff} \
+${sp_db} \
+${maker_blastp} \
+${snap02_gff_renamed} \
+> ${put_func_gff}
+
+### Proteins
+${maker_functional_fasta} \
+${sp_db} \
+${maker_blastp} \
+${maker_prot_fasta_renamed} \
+> ${put_func_prot}
+
+### Transcripts
+${maker_functional_fasta} \
+${sp_db} \
+${maker_blastp} \
+${maker_transcripts_fasta_renamed} \
+> ${put_func_trans}
+
+## Add InterProScan domain info
+### Add searchable tags
+${ipr_update_gff} \
+${put_func_gff} \
+${ips_dir}/${ips_name} \
+> ${put_domain_gff}
+
+### Add viewable features for genome browsers (JBrowse, Gbrowse, Web Apollo)
+${iprscan2gff3} \
+${ips_dir}/${ips_name} \
+${snap02_gff_renamed} \
+> ${ips_domains}
